@@ -1,5 +1,4 @@
 const { Sequelize } = require('sequelize');
-var initModels = require("./init-models");
 
 //create instance db
 const sequelize = new Sequelize(
@@ -12,8 +11,4 @@ const sequelize = new Sequelize(
     }
 );
 
-
-//init instance model
-var models = initModels(sequelize);
-
-module.exports = {sequelize, models};
+module.exports = sequelize;

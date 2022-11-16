@@ -4,7 +4,7 @@ require('dotenv').config();
  var debug = require('debug')('phoneshop:server');
  var http = require('http');
 
-const {sequelize, models} = require('../models/index');
+const sequelize = require('../models/index');
 
 sequelize.authenticate()
   .then(()=> {
