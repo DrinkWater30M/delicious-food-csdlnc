@@ -1,4 +1,4 @@
-const sequelize = require('../models').sequelize;
+const sequelize = require('../models');
 const { QueryTypes } = require('sequelize');
 
 async function getInfo(username){
