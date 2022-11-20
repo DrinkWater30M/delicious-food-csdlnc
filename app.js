@@ -3,6 +3,11 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
+var passport = require('./auth/passportConfig');
+var session = require('express-session');
+var SQLiteStore = require('connect-sqlite3')(session);
+var flash = require('connect-flash');
+
 
 const indexRouter = require('./routes/index');
 
@@ -12,11 +17,25 @@ const app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 
+//
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+//establish session
+app.use(passport.initialize());
+app.use(session({
+  secret: process.env.SESSION_SECRET,
+  resave: false,
+  saveUninitialized: false,
+  store: new SQLiteStore({ db: 'sessions.db', dir: './models' })
+}));
+app.use(passport.authenticate('session'));
+
+//flash message
+app.use(flash());
 
 //routing
 app.use('/', indexRouter);

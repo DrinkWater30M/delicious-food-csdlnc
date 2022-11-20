@@ -3,10 +3,12 @@ const foodService = require('../services/foodService');
 
 async function getHomePage(req, res){
     try{
-        //get list food
-        const food = await foodService.getAllFood();
-
-        res.render('home.hbs', {food: JSON.stringify(food)});
+        if(req.user){
+            res.locals.user = {...req.user};
+            console.log(req.user);
+        }
+        
+        res.render('home.hbs');
     }
     catch(error){
         console.log(error);
