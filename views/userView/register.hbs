@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=Í, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/dangky.css" />
+    <!-- css bootstrap -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+    />
+  </head>
+  <body>
+    <div class="cover">
+      <div class="formDangNhap">
+        <h1 style="color: white">Đăng Ký</h1>
+        <form id="registerForm" action="/user/register" method="post">
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label text-light"
+              >Tài Khoản</label
+            >
+            <input
+              id="username"
+              class="form-control"
+              id="exampleInputEmail1"
+              name="username"
+              aria-describedby="emailHelp"
+              style="text-transform: none;"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label text-light"
+              >Mật Khẩu</label
+            >
+            <input
+              id="password"
+              type="password"
+              name="password"
+              class="form-control"
+              style="text-transform: none;"
+              
+            />
+          </div>
+
+          <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label text-light"
+              >Xác Nhận Mật Khẩu</label
+            >
+            <input
+              id="confirmPassword"
+              type="password"
+              class="form-control"
+              style="text-transform: none;"
+              
+            />
+          </div>
+
+          <div style="width: 100%; text-align: right; font-size:1rem; color: black">
+            <span id="error">{{#with error}}{{this}}{{/with}}</span>
+          </div>
+          <button
+            type="button"
+            onclick="submitForm()"
+            class="btn btn-light w-25"
+            style="margin-left: 38%; text-decoration: none; color: black"
+          >
+            Đăng Ký
+          </button>
+        </form>
+      </div>
+    </div>
+  </body>
+
+  <script>
+    function submitForm(){
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+      const confirmPassword = document.getElementById('confirmPassword').value;
+      const registerForm = document.getElementById('registerForm');
+      const error = document.getElementById('error');
+
+      if(!username || !password || !confirmPassword){
+        error.textContent = 'Not empty!';
+        return;
+      }
+
+      if(password !== confirmPassword){
+        error.textContent = 'Incorrect confirm password';
+        return;
+      }
+
+      //submit
+      registerForm.submit();
+    }
+  </script>
+  <!-- js bootstrap -->
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.2/js/bootstrap.min.js"
+    integrity="sha512-5BqtYqlWfJemW5+v+TZUs22uigI8tXeVah5S/1Z6qBLVO7gakAOtkOzUtgq6dsIo5c0NJdmGPs0H9I+2OHUHVQ=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  ></script>
+</html>

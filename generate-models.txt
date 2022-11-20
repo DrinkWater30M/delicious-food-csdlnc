@@ -1,1 +1,0 @@
-npx sequelize-auto -h localhost -d ESHOPPING -u hello -x 123456 --dialect mssql -o "./models"
