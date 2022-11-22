@@ -18,6 +18,26 @@ async function getInfo(req, res){
     }
 }
 
+async function showUserInfo(req, res){
+    try{
+        //get username from request
+        const username = req.user.Username;;
+        const userInfo = await userService.getInfoByUserName(username);
+        // const info = userInfo[0];
+        //
+        res.render('userView/thongTinCaNhan', 
+        {HoTen: userInfo.HoTen,
+        SoDienThoai: userInfo.SoDienThoai,
+        DiaChi: userInfo.DiaChi,
+        Email: userInfo.Email,
+        })
+    
+    }
+    catch(error){
+        console.log(error);
+    }
+}
+
 async function getLoginPage(req, res){
     try{
         res.render('userView/login.hbs', {error: req.flash('error')[0]});
@@ -45,6 +65,7 @@ async function getRegisterPage(req, res){
     }
 }
 
+// Đăng ký tài khoản
 async function register(req, res){
     try{
         const {username, password} = req.body;
@@ -78,4 +99,5 @@ module.exports = {
     login,
     getRegisterPage,
     register,
+    showUserInfo,
 }

@@ -3,14 +3,19 @@ var router = express.Router();
 const passport = require('passport');
 const userController = require('../controllers/userController');
 const authController = require('../auth/authController');
+const middleware = require('../middleware/verifyLogin');
 
 /* GET users listing. */
-router.get('/info', userController.getInfo);
+router.post('/info', userController.getInfo);
+
+// Hiển thị thông tin cá nhân
+router.get('/profile', userController.showUserInfo);
 
 // GET login page
 router.get('/login', userController.getLoginPage);
 
 // POST login page
+// Xác thực tài khoản
 router.post('/login', passport.authenticate('local', {
     successRedirect: '/',
     failureRedirect: '/user/login',
