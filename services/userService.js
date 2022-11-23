@@ -15,9 +15,9 @@ async function getInfoByUserName(username){
     }
 }
 
-async function editUserInfo(username, email, sdt, diachi){
+async function editUserInfo(username, hoten, email, sdt, diachi){
     try{
-        const sql = `UPDATE KhachHang SET Email= '${email}', SoDienThoai = '${sdt}', DiaChi= '${diachi}' where KhachHang.Username = '${username}'`;
+        const sql = `UPDATE KhachHang SET HoTen = '${hoten}', Email= '${email}', SoDienThoai = '${sdt}', DiaChi= '${diachi}' where KhachHang.Username = '${username}'`;
         
         const userInfo = await sequelize.query(sql,  { type: QueryTypes.UPDATE });
 

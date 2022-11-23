@@ -11,6 +11,7 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
     />
+
   </head>
   <body>
     <!-- HEADER -->
@@ -64,6 +65,19 @@
               
             </div>
             <form class="content" method="POST" action="/user/editProfile">
+              <p>
+                HoTen:
+                <input
+                  name="hoten"
+                  type="text"
+                  value={{HoTen}}
+                  style="
+                    border: 1px solid black;
+                    padding: 2px;
+                    border-radius: 5px;
+                  "
+                />
+              </p>
               <p>
                 SDT:
                 <input

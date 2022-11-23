@@ -42,6 +42,13 @@ async function editPage(req, res){
     try{
         const username = req.user.Username;
         const userInfo = await userService.getInfoByUserName(username);
+        console.log(userInfo.HoTen);
+        console.log(userInfo.SoDienThoai);
+        console.log(userInfo.DiaChi);
+        if(userInfo.HoTen == null) userInfo.HoTen = 'empty';
+        if(!userInfo.SoDienThoai) userInfo.SoDienThoai = 'empty'
+        if(!userInfo.DiaChi) userInfo.DiaChi = 'empty'
+        if(!userInfo.Email) userInfo.Email = 'empty'
         res.render('userView/editTrangCaNhan', {
             HoTen: userInfo.HoTen,
             SoDienThoai: userInfo.SoDienThoai,
@@ -61,8 +68,10 @@ async function editUserInfo(req, res){
         const email = req.body.email;
         const sdt = req.body.sodienthoai;
         const diachi = req.body.diachi;
+        const hoten = req.body.hoten;
         const userInfo = await userService.getInfoByUserName(username);
-        await userService.editUserInfo(username, email, sdt, diachi);
+        
+        await userService.editUserInfo(username, hoten, email, sdt, diachi);
 
         // Có thể dùng res.render hoặc res.redirect('user/profile') đều được
         res.render('userView/thongTinCaNhan', 
