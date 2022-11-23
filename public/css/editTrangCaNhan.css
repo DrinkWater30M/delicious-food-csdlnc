@@ -53,19 +53,26 @@
   align-items: center;
 
 }
-.grid-right .contact .title a{
+.grid-right .contact .content button{
   background-color: #EEEEEE;
   padding: 10px;
   color:black;
   border-radius: 5px ;
   box-shadow: 7px 6px 13px 0px grey;
+  cursor: pointer;
+  position: absolute;
+  right: 288px;
+  top: 168px;
+  font-size: 18px;
+  text-align: center;
 };
 
-.grid-right .contact .title a:hover{
-  background-color: #FF7800;
+.grid-right .contact .content button:hover{
+  background-color: #FF7800 !important;
   padding: 10px;
   color: #fff;
   border-radius: 5px ;
+  
 }
 
 .grid-right .contact .content p {
