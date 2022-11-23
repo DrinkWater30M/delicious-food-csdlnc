@@ -2,8 +2,6 @@
 @import "/css/footer.css";
 @import "/css/reset.css";
 
-/* DANG NHAP */
-
 .container {
   display: grid;
   grid-template-columns: 30% 70%;
@@ -53,31 +51,25 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  
+
 }
-
-.grid-right .contact .content p {
-  font-size: 17px;
-  margin-bottom: 10px;
-  margin-left: 40px;
-}
-
-
-
 .grid-right .contact .title a{
   background-color: #EEEEEE;
   padding: 10px;
   color:black;
   border-radius: 5px ;
   box-shadow: 7px 6px 13px 0px grey;
-
-}
-
-
+};
 
 .grid-right .contact .title a:hover{
   background-color: #FF7800;
   padding: 10px;
   color: #fff;
   border-radius: 5px ;
+}
+
+.grid-right .contact .content p {
+  font-size: 17px;
+  margin-bottom: 10px;
+  margin-left: 40px;
 }

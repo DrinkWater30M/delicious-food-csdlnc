@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="/css/thongTinCaNhan.css" />
+    <link rel="stylesheet" href="/css/editTrangCaNhan.css" />
     <!-- cdn bootstrap -->
     <link
       rel="stylesheet"
@@ -31,7 +31,7 @@
         <a href="../page/gioHang.html">
           <div class="fas fa-shopping-cart" id="cart-btn"></div>
         </a>
-        <a href="../page/thongTinCaNhan.html">
+        <a href="/user/profile">
           <div class="fas fa-user" id="login-btn"></div>
         </a>
       </div>
@@ -61,13 +61,50 @@
           <div class="contact">
             <div class="title">
               <h3>Lien he</h3>
-              <a href="/user/editPage">Chỉnh sửa</a>
+              
             </div>
-            <div class="content">
-              <p>SDT: <span style="padding-left: 33px">{{SoDienThoai}}</span> </p>
-              <p>Dia chi: <span style="margin-left: 10px;">{{DiaChi}}</span></p>
-              <p>Email: <span style="margin-left: 25px;">{{Email}}</span></p>
-            </div>
+            <form class="content" method="POST" action="/user/editProfile">
+              <p>
+                SDT:
+                <input
+                  name="sodienthoai"
+                  type="text"
+                  value={{SoDienThoai}}
+                  style="
+                    border: 1px solid black;
+                    padding: 2px;
+                    border-radius: 5px;
+                  "
+                />
+              </p>
+              <p>
+                Dia chi:
+                <input
+                  name="diachi"
+                  type="text"
+                  value={{DiaChi}}
+                  style="
+                    border: 1px solid black;
+                    padding: 2px;
+                    border-radius: 5px;
+                  "
+                />
+              </p>
+              <p>
+                Email:
+                <input
+                  name="email"
+                  type="text"
+                  value={{Email}}
+                  style="
+                    border: 1px solid black;
+                    padding: 2px;
+                    border-radius: 5px;
+                  "
+                />
+              </p>
+              <button type="submit">Cập nhật</button>
+            </form>
           </div>
         </div>
       </div>

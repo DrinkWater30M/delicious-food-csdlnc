@@ -11,6 +11,12 @@ router.post('/info', userController.getInfo);
 // Hiển thị thông tin cá nhân
 router.get('/profile', userController.showUserInfo);
 
+// Hiển thị trang chỉnh sửa
+router.get('/editPage', userController.editPage);
+
+// Cập nhật profile
+router.post('/editProfile', userController.editUserInfo);
+
 // GET login page
 router.get('/login', userController.getLoginPage);
 

@@ -15,6 +15,19 @@ async function getInfoByUserName(username){
     }
 }
 
+async function editUserInfo(username, email, sdt, diachi){
+    try{
+        const sql = `UPDATE KhachHang SET Email= '${email}', SoDienThoai = '${sdt}', DiaChi= '${diachi}' where KhachHang.Username = '${username}'`;
+        
+        const userInfo = await sequelize.query(sql,  { type: QueryTypes.UPDATE });
+
+        return userInfo.length === 0 ? null : userInfo[0];
+    }
+    catch(error){
+        console.log(error);
+    }
+}
+
 async function getAccount(username){
     try{
         const sql = `select * from TaiKhoan where TaiKhoan.Username = '${username}'`;
@@ -52,4 +65,5 @@ module.exports = {
     getInfoByUserName,
     getAccount,
     addAccount,
+    editUserInfo,
 }

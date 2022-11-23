@@ -21,17 +21,58 @@ async function getInfo(req, res){
 async function showUserInfo(req, res){
     try{
         //get username from request
-        const username = req.user.Username;;
+        const username = req.user.Username;
         const userInfo = await userService.getInfoByUserName(username);
         // const info = userInfo[0];
         //
-        res.render('userView/thongTinCaNhan', 
-        {HoTen: userInfo.HoTen,
+        res.render('userView/thongTinCaNhan', {
+        HoTen: userInfo.HoTen,
         SoDienThoai: userInfo.SoDienThoai,
         DiaChi: userInfo.DiaChi,
         Email: userInfo.Email,
         })
     
+    }
+    catch(error){
+        console.log(error);
+    }
+}
+
+async function editPage(req, res){
+    try{
+        const username = req.user.Username;
+        const userInfo = await userService.getInfoByUserName(username);
+        res.render('userView/editTrangCaNhan', {
+            HoTen: userInfo.HoTen,
+            SoDienThoai: userInfo.SoDienThoai,
+            DiaChi: userInfo.DiaChi,
+            Email: userInfo.Email,})
+    
+    }
+    catch(error){
+        console.log(error);
+    }
+}
+
+async function editUserInfo(req, res){
+    try{
+        console.log("Đã vào được đây");
+        const username = req.user.Username;
+        const email = req.body.email;
+        const sdt = req.body.sodienthoai;
+        const diachi = req.body.diachi;
+        const userInfo = await userService.getInfoByUserName(username);
+        await userService.editUserInfo(username, email, sdt, diachi);
+
+        // Có thể dùng res.render hoặc res.redirect('user/profile') đều được
+        res.render('userView/thongTinCaNhan', 
+        {HoTen: userInfo.HoTen,
+        SoDienThoai: sdt,
+        DiaChi: diachi,
+        Email: email,
+        })
+
+        // res.redirect('user/profile');
     }
     catch(error){
         console.log(error);
@@ -100,4 +141,6 @@ module.exports = {
     getRegisterPage,
     register,
     showUserInfo,
+    editUserInfo,
+    editPage
 }
