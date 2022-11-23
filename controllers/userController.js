@@ -56,7 +56,7 @@ async function editPage(req, res){
 
 async function editUserInfo(req, res){
     try{
-        console.log("Đã vào được đây");
+        
         const username = req.user.Username;
         const email = req.body.email;
         const sdt = req.body.sodienthoai;
