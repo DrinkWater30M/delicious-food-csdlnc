@@ -2,35 +2,15 @@ const userService = require('../services/userService');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
-async function getInfo(req, res){
+async function getProfilePage(req, res){
     try{
-        //get username from request, now use mock data
-        const username = 'khachhang01';
-        const userInfo = await userService.getInfo(username);
+        //get id from request
+        const KhachHangID = req.user.KhachHangID;
+        const userInfo = await userService.getInfoByID(KhachHangID);
 
-        //
-        console.log(userInfo)
-        res.send(JSON.stringify(userInfo));
-    
-    }
-    catch(error){
-        console.log(error);
-    }
-}
-
-async function showUserInfo(req, res){
-    try{
-        //get username from request
-        const username = req.user.Username;
-        const userInfo = await userService.getInfoByUserName(username);
         // const info = userInfo[0];
         //
-        res.render('userView/thongTinCaNhan', {
-        HoTen: userInfo.HoTen,
-        SoDienThoai: userInfo.SoDienThoai,
-        DiaChi: userInfo.DiaChi,
-        Email: userInfo.Email,
-        })
+        res.render('userView/profile.hbs', {userInfo: {...userInfo}});
     
     }
     catch(error){
@@ -38,50 +18,32 @@ async function showUserInfo(req, res){
     }
 }
 
-async function editPage(req, res){
+async function getUpdateProfilePage(req, res){
     try{
-        const username = req.user.Username;
-        const userInfo = await userService.getInfoByUserName(username);
-        console.log(userInfo.HoTen);
-        console.log(userInfo.SoDienThoai);
-        console.log(userInfo.DiaChi);
-        if(userInfo.HoTen == null) userInfo.HoTen = 'empty';
-        if(!userInfo.SoDienThoai) userInfo.SoDienThoai = 'empty'
-        if(!userInfo.DiaChi) userInfo.DiaChi = 'empty'
-        if(!userInfo.Email) userInfo.Email = 'empty'
-        res.render('userView/editTrangCaNhan', {
-            HoTen: userInfo.HoTen,
-            SoDienThoai: userInfo.SoDienThoai,
-            DiaChi: userInfo.DiaChi,
-            Email: userInfo.Email,})
-    
+        //get id from request
+        const KhachHangID = req.user.KhachHangID;
+        const userInfo = await userService.getInfoByID(KhachHangID);
+        
+        // const info = userInfo[0];
+        //
+        res.render('userView/updateProfile.hbs', {userInfo: {...userInfo}});
     }
     catch(error){
         console.log(error);
     }
 }
 
-async function editUserInfo(req, res){
+async function updateProfile(req, res){
     try{
+        //get id user
+        const KhachHangID = req.user.KhachHangID;
+        const [Email, SoDienThoai, DiaChi, HoTen] = [req.body.email, req.body.sodienthoai, req.body.diachi, req.body.hoten];
         
-        const username = req.user.Username;
-        const email = req.body.email;
-        const sdt = req.body.sodienthoai;
-        const diachi = req.body.diachi;
-        const hoten = req.body.hoten;
-        const userInfo = await userService.getInfoByUserName(username);
-        
-        await userService.editUserInfo(username, hoten, email, sdt, diachi);
+        //update
+        await userService.updateProfile(KhachHangID, HoTen, SoDienThoai, Email, DiaChi);
 
-        // Có thể dùng res.render hoặc res.redirect('user/profile') đều được
-        res.render('userView/thongTinCaNhan', 
-        {HoTen: userInfo.HoTen,
-        SoDienThoai: sdt,
-        DiaChi: diachi,
-        Email: email,
-        })
-
-        // res.redirect('user/profile');
+        // res.redirect('/user/profile');
+        res.redirect('/user/profile');
     }
     catch(error){
         console.log(error);
@@ -144,12 +106,11 @@ async function register(req, res){
     }
 }
 module.exports = {
-    getInfo,
     getLoginPage,
     login,
     getRegisterPage,
     register,
-    showUserInfo,
-    editUserInfo,
-    editPage
+    getProfilePage,
+    getUpdateProfilePage,
+    updateProfile,
 }
