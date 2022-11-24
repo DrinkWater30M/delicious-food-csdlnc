@@ -18,6 +18,76 @@ async function getInfo(req, res){
     }
 }
 
+async function showUserInfo(req, res){
+    try{
+        //get username from request
+        const username = req.user.Username;
+        const userInfo = await userService.getInfoByUserName(username);
+        // const info = userInfo[0];
+        //
+        res.render('userView/thongTinCaNhan', {
+        HoTen: userInfo.HoTen,
+        SoDienThoai: userInfo.SoDienThoai,
+        DiaChi: userInfo.DiaChi,
+        Email: userInfo.Email,
+        })
+    
+    }
+    catch(error){
+        console.log(error);
+    }
+}
+
+async function editPage(req, res){
+    try{
+        const username = req.user.Username;
+        const userInfo = await userService.getInfoByUserName(username);
+        console.log(userInfo.HoTen);
+        console.log(userInfo.SoDienThoai);
+        console.log(userInfo.DiaChi);
+        if(userInfo.HoTen == null) userInfo.HoTen = 'empty';
+        if(!userInfo.SoDienThoai) userInfo.SoDienThoai = 'empty'
+        if(!userInfo.DiaChi) userInfo.DiaChi = 'empty'
+        if(!userInfo.Email) userInfo.Email = 'empty'
+        res.render('userView/editTrangCaNhan', {
+            HoTen: userInfo.HoTen,
+            SoDienThoai: userInfo.SoDienThoai,
+            DiaChi: userInfo.DiaChi,
+            Email: userInfo.Email,})
+    
+    }
+    catch(error){
+        console.log(error);
+    }
+}
+
+async function editUserInfo(req, res){
+    try{
+        
+        const username = req.user.Username;
+        const email = req.body.email;
+        const sdt = req.body.sodienthoai;
+        const diachi = req.body.diachi;
+        const hoten = req.body.hoten;
+        const userInfo = await userService.getInfoByUserName(username);
+        
+        await userService.editUserInfo(username, hoten, email, sdt, diachi);
+
+        // Có thể dùng res.render hoặc res.redirect('user/profile') đều được
+        res.render('userView/thongTinCaNhan', 
+        {HoTen: userInfo.HoTen,
+        SoDienThoai: sdt,
+        DiaChi: diachi,
+        Email: email,
+        })
+
+        // res.redirect('user/profile');
+    }
+    catch(error){
+        console.log(error);
+    }
+}
+
 async function getLoginPage(req, res){
     try{
         res.render('userView/login.hbs', {error: req.flash('error')[0]});
@@ -45,6 +115,7 @@ async function getRegisterPage(req, res){
     }
 }
 
+// Đăng ký tài khoản
 async function register(req, res){
     try{
         const {username, password} = req.body;
@@ -78,4 +149,7 @@ module.exports = {
     login,
     getRegisterPage,
     register,
+    showUserInfo,
+    editUserInfo,
+    editPage
 }
