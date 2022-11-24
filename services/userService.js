@@ -15,13 +15,31 @@ async function getInfoByUserName(username){
     }
 }
 
-async function editUserInfo(username, hoten, email, sdt, diachi){
+async function getInfoByID(KhachHangID){
     try{
-        const sql = `UPDATE KhachHang SET HoTen = '${hoten}', Email= '${email}', SoDienThoai = '${sdt}', DiaChi= '${diachi}' where KhachHang.Username = '${username}'`;
+        const sql = `select * from KhachHang where KhachHang.KhachHangID = '${KhachHangID}'`;
         
-        const userInfo = await sequelize.query(sql,  { type: QueryTypes.UPDATE });
+        const userInfo = await sequelize.query(sql,  { type: QueryTypes.SELECT });
 
         return userInfo.length === 0 ? null : userInfo[0];
+    }
+    catch(error){
+        console.log(error);
+    }
+}
+
+async function updateProfile(KhachHangID, HoTen, SoDienThoai, Email, DiaChi){
+    try{
+        const sqlHoTen = HoTen ? `N'${HoTen}'` : null;
+        const sqlSoDienThoai = SoDienThoai ? `'${SoDienThoai}'` : null;
+        const sqlEmail = Email ? `'${Email}'` : null;
+        const sqlDiaChi = DiaChi ? `N'${DiaChi}'` : null;
+        const sql = 
+            `UPDATE KhachHang SET 
+                HoTen = ${sqlHoTen}, Email = ${sqlEmail}, SoDienThoai = ${sqlSoDienThoai}, DiaChi= ${sqlDiaChi}
+            where KhachHang.KhachHangID = '${KhachHangID}'`;
+        
+        await sequelize.query(sql,  { type: QueryTypes.UPDATE });
     }
     catch(error){
         console.log(error);
@@ -63,7 +81,8 @@ async function addAccount(username, hashPassword){
 
 module.exports = {
     getInfoByUserName,
+    getInfoByID,
     getAccount,
     addAccount,
-    editUserInfo,
+    updateProfile,
 }

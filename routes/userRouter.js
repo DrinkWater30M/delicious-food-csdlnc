@@ -5,17 +5,14 @@ const userController = require('../controllers/userController');
 const authController = require('../auth/authController');
 const middleware = require('../middleware/verifyLogin');
 
-/* GET users listing. */
-router.post('/info', userController.getInfo);
-
 // Hiển thị thông tin cá nhân
-router.get('/profile', userController.showUserInfo);
+router.get('/profile', userController.getProfilePage);
 
 // Hiển thị trang chỉnh sửa
-router.get('/editPage', userController.editPage);
+router.get('/updateProfile', userController.getUpdateProfilePage);
 
 // Cập nhật profile
-router.post('/editProfile', userController.editUserInfo);
+router.post('/updateProfile', userController.updateProfile);
 
 // GET login page
 router.get('/login', userController.getLoginPage);
