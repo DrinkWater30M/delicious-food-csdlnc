@@ -1,0 +1,105 @@
+@import "./header.css";
+@import "./footer.css";
+@import "./reset.css";
+
+.content {
+  margin-bottom: 50px;
+}
+
+.content .content-top {
+    display: flex;
+    margin-top: 150px;
+    justify-content: space-around;
+}
+
+.content .content-top h1{
+  font-size: 25px;
+}
+
+.content .content-top .search .from button{
+  background-color: #e19452;
+  padding: 15px;
+  border-radius: 20px;
+  color: white;
+  cursor: pointer;
+}
+
+.content .content-top .search .from input {
+ padding: 15px;
+ width: 250px;
+ border-radius: 20px;
+}
+
+.content .productList {
+  width: 80%;
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  margin: 0 auto;
+}
+
+.content .productList .product:hover{
+    box-shadow: 6px 11px 9px 0px #e19452;
+    transform: translateY(-0.125rem);
+}
+
+.content .productList .product {
+  margin: 10px auto;
+  padding: 35px;
+  background-color: white;
+  border-radius: 15px;
+}
+
+.content .productList .product img {
+  width: 220px;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.content .productList .product .product-content {
+}
+
+.content .productList .product .product-content .name {
+  color: black;
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.content .productList .product .product-content .status {
+  color: black;
+  font-size: 15px;
+  margin-bottom: 10px;
+
+}
+
+.content .productList .product .product-content .price {
+  color: black;
+  font-size: 15px;
+
+}
+
+
+.content-bottom {
+  text-align: center;
+  font-size: 17px;
+  margin-top: 20px;
+}
+
+.content-bottom .pagination li {
+display: inline;
+}
+
+.content-bottom .pagination li a{
+  display: inline-block;
+  text-decoration: none;
+  padding: 5px 10px;
+  color: white;
+  background-color: #dfb997;
+  border-radius: 5px;
+}
+
+.content-bottom .pagination li .active{
+  background: #F9880E;
+  color: white;
+}
+/*  */
