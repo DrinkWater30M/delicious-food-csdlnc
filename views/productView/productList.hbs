@@ -4,8 +4,8 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Delicious Food</title>
-    <link rel="stylesheet" href="/css/trangChu.css" />
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/danhSachSanPham.css" />
     <!-- cdn bootstrap -->
     <link
       rel="stylesheet"
@@ -21,40 +21,74 @@
       <nav class="navbar">
         <a href="/">home</a>
         <a href="#features">features</a>
-        <a href="/product/list?page=1">products</a>
-        <a href="#categories">Food Shop</a>
+        <a href="/product/list">products</a>
+        <a href="../page/danhSachDoiTac.html">food shop </a>
+        
         <a href="#review">review</a>
         <a href="#blogs">blogs</a>
       </nav>
 
       <div class="icons">
-        <a href="./Gio Hang/index.html">
+        <a href="/user/cart">
           <div class="fas fa-shopping-cart" id="cart-btn"></div>
         </a>
         <a href="/user/profile">
           <div class="fas fa-user" id="login-btn"></div>
         </a>
-        {{#if user}}
-          <a href="#" onclick="document.getElementById('logout-form').submit()">
-            <div class="fas fa-sign-out-alt" title="Logout"></div>
-          </a>
-          <span style="color: black; font-size: 1.2rem; text-transform: none">{{user.Username}}</span>
-          <form id="logout-form" action="/user/logout" method="post"></form>
-          </form>
-        {{/if}}
       </div>
     </header>
     <!-- HEADER -->
     <!-- Body -->
-   <section class="home" id="home">
-
     <div class="content">
-        <h3>Order food<span> Fast </span>For You</h3>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam libero nostrum veniam facere tempore nisi.</p>
-        <a href="/product/list?page=1" class="btn">order now</a>
+      <div class="content-top" >
+        <h1>danh sach san pham</h1>
+        <div class="search">
+              <div class="from">
+                  <p style="margin-bottom: 5px;">tim kiem</p>
+                  <i class="fa-solid fa-magnifying-glass"></i>
+                  <input type="text">
+                  <button>Search</button>
+              </div>
+          </div>
+      </div>
+      <div class="productList">
+        {{#each productList}}
+        <a href="/product/detail?id={{this.MonID}}" class="product">
+          <img src="{{this.LinkHinhAnh}}" alt="food" />
+          <div class="product-content">
+            <h3 class="name">{{this.TenMon}}</h3>
+            <p class="status">Tình trạng : <span>{{this.TinhTrang}}</span></p>
+            <p class="price">Giá:{{this.Gia}}đ</p>
+          </div>
+        </a>
+        {{/each}}
+      </div>
+      <div class="content-bottom">
+        <ul class="pagination">
+          <li>
+            <a class="button-pagination pre" href="">pre</a>
+          </li>
+          <li>
+             <a class="button-pagination page" href="/product/list?page=1">1</a>
+          </li>
+          <li>
+             <a class="button-pagination page" href="/product/list?page=2">2</a>
+          </li>
+          <li>
+             <a class="button-pagination page" href="/product/list?page=3">3</a>
+          </li>
+          <li>
+             <a class="button-pagination page" href="/product/list?page=4">4</a>
+          </li>
+          <li>
+             <a class="button-pagination page" href="/product/list?page=5">5</a>
+          </li>
+          <li>
+             <a class="button-pagination next" href="">next</a>
+          </li>
+        </ul>
+      </div>
     </div>
-
-</section>
     <!-- Body -->
     <!-- FOOTER -->
     <section class="footer">
@@ -97,11 +131,11 @@
           <a href="#" class="links">
             <i class="fas fa-arrow-right"></i> features
           </a>
-          <a href="/product/list?page=1" class="links">
+          <a href="/product/list" class="links">
             <i class="fas fa-arrow-right"></i> products
           </a>
           <a href="#" class="links">
-            <i class="fas fa-arrow-right"></i> Food Shop
+            <i class="fas fa-arrow-right"></i> categories
           </a>
           <a href="#" class="links">
             <i class="fas fa-arrow-right"></i> review
@@ -125,4 +159,21 @@
       </div>
     </section>
   </body>
+  <script>
+    const pagination = document.querySelectorAll('.button-pagination.page');
+
+    //get page from url
+    const params = new Proxy(new URLSearchParams(window.location.search), {
+      get: (searchParams, prop) => searchParams.get(prop),
+    });
+    // Get the value of "some_key" in eg "https://example.com/?some_key=some_value"
+    const page = params.page;
+
+    //add active
+    pagination.forEach((item)=>{
+      if(parseInt(item.textContent) == page){
+        item.classList.add('active');
+      }
+    })
+  </script>
 </html>

@@ -9,4 +9,8 @@ router.use('/', homeRouter);
 const userRouter = require('./userRouter');
 router.use('/user', userRouter);
 
+//product path
+const productRouter = require('./productRouter');
+router.use('/product', productRouter);
+
 module.exports = router;
