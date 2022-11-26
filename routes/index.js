@@ -13,4 +13,8 @@ router.use('/user', userRouter);
 const productRouter = require('./productRouter');
 router.use('/product', productRouter);
 
+//food shop path
+const foodShopRouter = require('./foodShopRouter');
+router.use('/foodShop', foodShopRouter);
+
 module.exports = router;

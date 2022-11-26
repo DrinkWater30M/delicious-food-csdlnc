@@ -1,5 +1,4 @@
 const userService = require('../services/userService');
-const foodService = require('../services/foodService');
 
 async function getHomePage(req, res){
     try{
