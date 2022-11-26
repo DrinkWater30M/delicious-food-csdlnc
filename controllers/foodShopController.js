@@ -8,7 +8,7 @@ async function getFoodShopListPage(req, res){
 
         //
         const foodShopList = await foodShopService.getFoodShopList(search, page);
-
+        
         //return
         res.render('foodShopView/foodShopList.hbs', {foodShopList});
     }

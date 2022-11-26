@@ -21,8 +21,8 @@
       <nav class="navbar">
         <a href="/">home</a>
         <a href="#features">features</a>
-        <a href="/product/list">products</a>
-        <a href="../page/danhSachDoiTac.html">food shop </a>
+        <a href="/product/list?foodShop=&search=&page=1">products</a>
+        <a href="/foodShop/list?search=&page=1">food shop </a>
         
         <a href="#review">review</a>
         <a href="#blogs">blogs</a>
@@ -41,14 +41,18 @@
     <!-- Body -->
     <div class="content">
       <div class="content-top" >
-        <h1>danh sach san pham</h1>
+        <h1>danh sach san pham: </h1>
         <div class="search">
-              <div class="from">
-                  <p style="margin-bottom: 5px;">tim kiem</p>
-                  <i class="fa-solid fa-magnifying-glass"></i>
-                  <input type="text">
-                  <button>Search</button>
-              </div>
+          <form action="/product/list" method="get">
+            <div class="from">
+              <p style="margin-bottom: 5px;">tim kiem</p>
+              <i class="fa-solid fa-magnifying-glass"></i>
+              <input type="hidden" name="foodShop" value="">
+              <input type="text" name="search"/>
+              <input type="hidden" name="page" value="1"/>
+              <button type="submit">Search</button>
+            </div>
+          </form>
           </div>
       </div>
       <div class="productList">
@@ -57,8 +61,9 @@
           <img src="{{this.LinkHinhAnh}}" alt="food" />
           <div class="product-content">
             <h3 class="name">{{this.TenMon}}</h3>
-            <p class="status">Tình trạng : <span>{{this.TinhTrang}}</span></p>
-            <p class="price">Giá:{{this.Gia}}đ</p>
+            <p class="status">Tình trạng: <span>{{this.TinhTrang}}</span></p>
+            <p class="price">Giá: {{this.Gia}}đ</p>
+            <p class="shop">Quán: {{this.TenChiNhanh}}</p>
           </div>
         </a>
         {{/each}}
@@ -69,19 +74,19 @@
             <a class="button-pagination pre" href="">pre</a>
           </li>
           <li>
-             <a class="button-pagination page" href="/product/list?page=1">1</a>
+             <a class="button-pagination page">1</a>
           </li>
           <li>
-             <a class="button-pagination page" href="/product/list?page=2">2</a>
+             <a class="button-pagination page">2</a>
           </li>
           <li>
-             <a class="button-pagination page" href="/product/list?page=3">3</a>
+             <a class="button-pagination page">3</a>
           </li>
           <li>
-             <a class="button-pagination page" href="/product/list?page=4">4</a>
+             <a class="button-pagination page">4</a>
           </li>
           <li>
-             <a class="button-pagination page" href="/product/list?page=5">5</a>
+             <a class="button-pagination page">5</a>
           </li>
           <li>
              <a class="button-pagination next" href="">next</a>
@@ -131,11 +136,11 @@
           <a href="#" class="links">
             <i class="fas fa-arrow-right"></i> features
           </a>
-          <a href="/product/list" class="links">
+          <a href="/product/list?search=&page=1" class="links">
             <i class="fas fa-arrow-right"></i> products
           </a>
-          <a href="#" class="links">
-            <i class="fas fa-arrow-right"></i> categories
+          <a href="/foodShop/list?search=&page=1" class="links">
+            <i class="fas fa-arrow-right"></i> food shop
           </a>
           <a href="#" class="links">
             <i class="fas fa-arrow-right"></i> review
@@ -167,13 +172,25 @@
       get: (searchParams, prop) => searchParams.get(prop),
     });
     // Get the value of "some_key" in eg "https://example.com/?some_key=some_value"
-    const page = params.page;
+    const foodShop = params.foodShop;
+    const currentPage = params.page;
+    const search = params.search;
 
-    //add active
+    //add active anh link for pagination
     pagination.forEach((item)=>{
-      if(parseInt(item.textContent) == page){
+      //active
+      if(parseInt(item.textContent) == currentPage){
         item.classList.add('active');
       }
+
+      //add link
+      const page = item.textContent;
+      item.href = `/product/list?foodShop=${foodShop}&search=${search}&page=${page}`
     })
+
+    //add id food shop, search for input
+    document.querySelector('input[name="foodShop"]').value = params.foodShop;
+    document.querySelector('input[name="search"]').value = params.search;
+
   </script>
 </html>

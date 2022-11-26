@@ -21,7 +21,7 @@
       <nav class="navbar">
         <a href="/">home</a>
         <a href="#features">features</a>
-        <a href="/product/list?page=1">products</a>
+        <a href="/product/list?foodShop=&search=&page=1">products</a>
 
         <a href="/foodShop/list?search=&page=1">food shop</a>
         <a href="#review">review</a>
@@ -48,16 +48,16 @@
           <div class="from">
             <p style="margin-bottom: 5px">tim kiem</p>
             <i class="fa-solid fa-magnifying-glass"></i>
-              <input type="text" name="search"/>
-              <input type="hidden" name="page" value="1"/>
-              <button type="submit">Search</button>
+            <input type="text" name="search"/>
+            <input type="hidden" name="page" value="1"/>
+            <button type="submit">Search</button>
           </div>
           </form>
         </div>
       </div>
       <div class="content">
         {{#each foodShopList}}
-        <a href="/product/list?page=1" style="color: inherit;">
+        <a href="/product/list?foodShop={{this.ChiNhanhID}}&search=&page=1" style="color: inherit;">
           <div class="item">
             <div class="left">
               <img src="{{this.LinkHinhAnh}}" alt="food shop" />
@@ -149,11 +149,11 @@
           <a href="#" class="links">
             <i class="fas fa-arrow-right"></i> features
           </a>
-          <a href="#" class="links">
+          <a href="/product/list?foodShop=&search=&page=1" class="links">
             <i class="fas fa-arrow-right"></i> products
           </a>
-          <a href="#" class="links">
-            <i class="fas fa-arrow-right"></i> categories
+          <a href="/foodShop/list?search=&page=1" class="links">
+            <i class="fas fa-arrow-right"></i> food shop
           </a>
           <a href="#" class="links">
             <i class="fas fa-arrow-right"></i> review
@@ -198,5 +198,8 @@
       const page = item.textContent;
       item.href = `/foodShop/list?search=${search}&page=${page}`
     })
+
+    //add input to search bar
+    document.querySelector('input[name="search"]').value = params.search;
   </script>
 </html>

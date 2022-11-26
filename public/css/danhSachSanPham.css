@@ -65,17 +65,10 @@
   margin-bottom: 10px;
 }
 
-.content .productList .product .product-content .status {
+.content .productList .product .product-content p{
   color: black;
   font-size: 15px;
   margin-bottom: 10px;
-
-}
-
-.content .productList .product .product-content .price {
-  color: black;
-  font-size: 15px;
-
 }
 
 
