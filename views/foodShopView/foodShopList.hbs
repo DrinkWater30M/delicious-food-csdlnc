@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="/css/danhSachSanPham.css" />
+    <link rel="stylesheet" href="/css/danhSachDoiTac.css" />
     <!-- cdn bootstrap -->
     <link
       rel="stylesheet"
@@ -22,48 +22,61 @@
         <a href="/">home</a>
         <a href="#features">features</a>
         <a href="/product/list?foodShop=&search=&page=1">products</a>
-        <a href="/foodShop/list?search=&page=1">food shop </a>
-        
+
+        <a href="/foodShop/list?search=&page=1">food shop</a>
         <a href="#review">review</a>
         <a href="#blogs">blogs</a>
       </nav>
 
       <div class="icons">
-        <a href="/user/cart">
+        <a href="../page/gioHang.html">
           <div class="fas fa-shopping-cart" id="cart-btn"></div>
         </a>
-        <a href="/user/profile">
+        <a href="../page/thongTinCaNhan.html">
           <div class="fas fa-user" id="login-btn"></div>
         </a>
       </div>
     </header>
     <!-- HEADER -->
     <!-- Body -->
-    <div class="content">
-      <div class="content-top" >
-        <h1>danh sach san pham: </h1>
+
+    <div class="partner" style="margin: 150px">
+      <div class="content-top">
+        <h1 style="margin-left: 40px">danh sach doi tac</h1>
         <div class="search">
-          <form action="/product/list" method="get">
-            <div class="from">
-              <p style="margin-bottom: 5px;">tim kiem</p>
-              <i class="fa-solid fa-magnifying-glass"></i>
-              <input type="hidden" name="foodShop" value="">
-              <input type="text" name="search"/>
-              <input type="hidden" name="page" value="1"/>
-              <button type="submit">Search</button>
-            </div>
-          </form>
+          <form action="/foodShop/list" method="get">
+          <div class="from">
+            <p style="margin-bottom: 5px">tim kiem</p>
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" name="search"/>
+            <input type="hidden" name="page" value="1"/>
+            <button type="submit">Search</button>
           </div>
+          </form>
+        </div>
       </div>
-      <div class="productList">
-        {{#each productList}}
-        <a href="/product/detail?id={{this.MonID}}" class="product">
-          <img src="{{this.LinkHinhAnh}}" alt="food" />
-          <div class="product-content">
-            <h3 class="name">{{this.TenMon}}</h3>
-            <p class="status">Tình trạng: <span>{{this.TinhTrang}}</span></p>
-            <p class="price">Giá: {{this.Gia}}đ</p>
-            <p class="shop">Quán: {{this.TenChiNhanh}}</p>
+      <div class="content">
+        {{#each foodShopList}}
+        <a href="/product/list?foodShop={{this.ChiNhanhID}}&search=&page=1" style="color: inherit;">
+          <div class="item">
+            <div class="left">
+              <img src="{{this.LinkHinhAnh}}" alt="food shop" />
+              <div class="title">
+                <h3>Quán: {{this.TenChiNhanh}}</h3>
+                <p>Loại Ẩm Thực: {{this.LoaiAmThuc}}</p>
+                <p>Địa chỉ: {{this.DiaChi}}</p>
+                <div class="icon">
+                  <i class="fas fa-star" style="color: rgba(255, 200, 0, 0.886); font-size: 10px"></i>
+                  <i class="fas fa-star" style="color: rgba(255, 200, 0, 0.886); font-size: 12px"></i>
+                  <i class="fas fa-star" style="color: rgba(255, 200, 0, 0.886); font-size: 14px"></i>
+                  <i class="fas fa-star" style="color: rgba(255, 200, 0, 0.886); font-size: 16px"></i>
+                  <i class="fas fa-star" style="color: rgba(255, 200, 0, 0.886); font-size: 18px"></i>
+                </div>
+              </div>
+            </div>
+            <div class="right-active">
+              <p>{{#if this.TinhTrang}}{{this.TinhTrang}}{{else}}Đang mở cửa{{/if}}</p>
+            </div>
           </div>
         </a>
         {{/each}}
@@ -130,13 +143,13 @@
 
         <div class="box">
           <h3>quick links</h3>
-          <a href="#" class="links">
+          <a href="/" class="links">
             <i class="fas fa-arrow-right"></i> home
           </a>
           <a href="#" class="links">
             <i class="fas fa-arrow-right"></i> features
           </a>
-          <a href="/product/list?search=&page=1" class="links">
+          <a href="/product/list?foodShop=&search=&page=1" class="links">
             <i class="fas fa-arrow-right"></i> products
           </a>
           <a href="/foodShop/list?search=&page=1" class="links">
@@ -172,11 +185,9 @@
       get: (searchParams, prop) => searchParams.get(prop),
     });
     // Get the value of "some_key" in eg "https://example.com/?some_key=some_value"
-    const foodShop = params.foodShop;
     const currentPage = params.page;
     const search = params.search;
-
-    //add active anh link for pagination
+    //add active
     pagination.forEach((item)=>{
       //active
       if(parseInt(item.textContent) == currentPage){
@@ -185,12 +196,10 @@
 
       //add link
       const page = item.textContent;
-      item.href = `/product/list?foodShop=${foodShop}&search=${search}&page=${page}`
+      item.href = `/foodShop/list?search=${search}&page=${page}`
     })
 
-    //add id food shop, search for input
-    document.querySelector('input[name="foodShop"]').value = params.foodShop;
+    //add input to search bar
     document.querySelector('input[name="search"]').value = params.search;
-
   </script>
 </html>
