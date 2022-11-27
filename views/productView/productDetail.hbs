@@ -5,13 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="/css/editTrangCaNhan.css" />
+    <link rel="stylesheet" href="/css/trangChiTiet.css" />
     <!-- cdn bootstrap -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
     />
-
   </head>
   <body>
     <!-- HEADER -->
@@ -22,9 +21,10 @@
       <nav class="navbar">
         <a href="/">home</a>
         <a href="#features">features</a>
-        <a href="/product/list?foodShop=&search=&page=1">products</a>
-        <a href="/foodShop/list?search=&page=1">Food Shop</a>
-        <a href="#categories">categories</a>
+               <a href="/product/list?foodShop=&search=&page=1">products</a>
+
+               <a href="/foodShop/list?search=&page=1"> food shop</a>
+
         <a href="#review">review</a>
         <a href="#blogs">blogs</a>
       </nav>
@@ -40,91 +40,37 @@
     </header>
     <!-- HEADER -->
     <!-- Body -->
-    <div class="inf">
-      <h1
-        style="
-          text-align: center;
-          margin-bottom: 30px;
-          font-size: 30px;
-          color: #130f40;
-        "
-      >
-        Thông tin cá nhân
-      </h1>
-      <div class="container">
-        <div class="grid-left">
-          <img src="/img/download.jpeg" alt="" />
+    <div class="detail">
+      <h1>trang chi tiet</h1>
+      <form class="content" method="post" action="/product/detail/{{detail.MonID}}">
+        <div class="content-left">
+          <img src={{detail.LinkHinhAnh}} alt="" />
+        </div>
+        <div class="content-right">
           <div class="name">
-            <h3>{{HoTen}}</h3>
+            <h3>name</h3>
+          <h4 style="font-size: 18px;">{{detail.TenMon}}</h4>
           </div>
-        </div>
+          <div class="quantity">
+            <h3>quantity</h3>
+            <input type="number" value="3" name="soluong" />
+          </div>
+          <div class="describe">
+            <h3>describe</h3>
+            <p style="font-size: 12px;">
+              {{detail.MieuTaMon}}
+            </p>
+          </div>
+          
+          <div class="price">
+            <h3>{{detail.Gia}}</h3>
+            <button type="submit" style="cursor: pointer;"> + add to cart</button>
+          </div>
+   
 
-        <div class="grid-right">
-          <div class="contact">
-            <div class="title">
-              <h3>Lien he</h3>
-              
-            </div>
-            <form class="content" method="POST" action="/user/updateProfile">
-            {{#with userInfo}}
-              <p>
-                HoTen:
-                <input
-                  name="hoten"
-                  type="text"
-                  value={{#if this.HoTen}}{{this.HoTen}}{{else}}""{{/if}}
-                  style="
-                    border: 1px solid black;
-                    padding: 2px;
-                    border-radius: 5px;
-                  "
-                />
-              </p>
-              <p>
-                SDT:
-                <input
-                  name="sodienthoai"
-                  type="text"
-                  value={{#if this.SoDienThoai}}{{this.SoDienThoai}}{{else}}""{{/if}}
-                  style="
-                    border: 1px solid black;
-                    padding: 2px;
-                    border-radius: 5px;
-                  "
-                />
-              </p>
-              <p>
-                Dia chi:
-                <input
-                  name="diachi"
-                  type="text"
-                  value={{#if this.DiaChi}}{{this.DiaChi}}{{else}}""{{/if}}
-                  style="
-                    border: 1px solid black;
-                    padding: 2px;
-                    border-radius: 5px;
-                  "
-                />
-              </p>
-              <p>
-                Email:
-                <input
-                  name="email"
-                  type="text"
-                  value={{#if this.Email}}{{this.Email}}{{else}}""{{/if}}
-                  style="
-                    border: 1px solid black;
-                    padding: 2px;
-                    border-radius: 5px;
-                  "
-                />
-              </p>
-              <button type="submit">Cập nhật</button>
-            {{/with}}
-            </form>
-          </div>
         </div>
-      </div>
+      </form>
+      <h4 style="color: red; font-size:16px;">{{result}}</h4>
     </div>
     <!-- Body -->
     <!-- FOOTER -->

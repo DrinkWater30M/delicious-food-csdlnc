@@ -1,8 +1,11 @@
-@import "/css/header.css";
-@import "/css/footer.css";
-@import "/css/reset.css";
+@import "./header.css";
+@import "./footer.css";
+@import "./reset.css";
 
-/* DANG NHAP */
+
+.inf{
+  margin: 200px 0;
+}
 
 .container {
   display: grid;
@@ -40,13 +43,6 @@
   margin: 60px 40px;
 }
 
-.inf {
-  position: absolute;
-  width: 100%;
-  top: 18%;
-  /* margin-top: 200px; */
-}
-
 .grid-right .contact .title {
   font-size: 18px;
   margin-bottom: 10px;
@@ -70,7 +66,6 @@
   color:black;
   border-radius: 5px ;
   box-shadow: 7px 6px 13px 0px grey;
-
 }
 
 

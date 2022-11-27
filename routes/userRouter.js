@@ -6,13 +6,13 @@ const authController = require('../auth/authController');
 const middleware = require('../middleware/verifyLogin');
 
 // Hiển thị thông tin cá nhân
-router.get('/profile', userController.getProfilePage);
+router.get('/profile', middleware.verifyLogin, userController.getProfilePage);
 
 // Hiển thị trang chỉnh sửa
-router.get('/updateProfile', userController.getUpdateProfilePage);
+router.get('/updateProfile', middleware.verifyLogin, userController.getUpdateProfilePage);
 
 // Cập nhật profile
-router.post('/updateProfile', userController.updateProfile);
+router.post('/updateProfile', middleware.verifyLogin, userController.updateProfile);
 
 // GET login page
 router.get('/login', userController.getLoginPage);

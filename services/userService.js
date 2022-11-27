@@ -1,6 +1,7 @@
 const sequelize = require('../models');
 const { QueryTypes } = require('sequelize');
 const generateID = require('../utils/generateID');
+const { log } = require('handlebars');
 
 async function getInfoByUserName(username){
     try{
@@ -75,7 +76,6 @@ async function addAccount(username, hashPassword){
         console.log(error);
     }
 }
-
 
 
 

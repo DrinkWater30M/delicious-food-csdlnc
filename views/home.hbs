@@ -19,10 +19,10 @@
         <i class="fas fa-shopping-basket"></i> groco
       </a>
       <nav class="navbar">
-        <a href="#home">home</a>
+        <a href="/">home</a>
         <a href="#features">features</a>
-        <a href="#products">products</a>
-        <a href="#categories">categories</a>
+        <a href="/product/list?foodShop=&search=&page=1">products</a>
+        <a href="/foodShop/list?search=&page=1">Food Shop</a>
         <a href="#review">review</a>
         <a href="#blogs">blogs</a>
       </nav>
@@ -31,20 +31,16 @@
         <a href="./Gio Hang/index.html">
           <div class="fas fa-shopping-cart" id="cart-btn"></div>
         </a>
-        {{#if user}}
         <a href="/user/profile">
           <div class="fas fa-user" id="login-btn"></div>
         </a>
+        {{#if user}}
           <a href="#" onclick="document.getElementById('logout-form').submit()">
             <div class="fas fa-sign-out-alt" title="Logout"></div>
           </a>
           <span style="color: black; font-size: 1.2rem; text-transform: none">{{user.Username}}</span>
           <form id="logout-form" action="/user/logout" method="post"></form>
           </form>
-        {{else}}
-          <a href="/user/login">
-          <div class="fas fa-user" id="login-btn"></div>
-        </a>
         {{/if}}
       </div>
     </header>
@@ -55,7 +51,7 @@
     <div class="content">
         <h3>Order food<span> Fast </span>For You</h3>
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam libero nostrum veniam facere tempore nisi.</p>
-        <a href="./" class="btn">order now</a>
+        <a href="/product/list?foodShop=&search=&page=1" class="btn">order now</a>
     </div>
 
 </section>
@@ -101,11 +97,11 @@
           <a href="#" class="links">
             <i class="fas fa-arrow-right"></i> features
           </a>
-          <a href="#" class="links">
+          <a href="/product/list?foodShop=&search=&page=1" class="links">
             <i class="fas fa-arrow-right"></i> products
           </a>
-          <a href="#" class="links">
-            <i class="fas fa-arrow-right"></i> categories
+          <a href="/foodShop/list?search=&page=1" class="links">
+            <i class="fas fa-arrow-right"></i> Food Shop
           </a>
           <a href="#" class="links">
             <i class="fas fa-arrow-right"></i> review

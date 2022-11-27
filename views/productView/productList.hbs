@@ -5,32 +5,31 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="/css/editTrangCaNhan.css" />
+    <link rel="stylesheet" href="/css/danhSachSanPham.css" />
     <!-- cdn bootstrap -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
     />
-
   </head>
   <body>
     <!-- HEADER -->
     <header class="header">
-      <a href="#" class="logo">
+      <a href="/" class="logo">
         <i class="fas fa-shopping-basket"></i> groco
       </a>
       <nav class="navbar">
         <a href="/">home</a>
         <a href="#features">features</a>
         <a href="/product/list?foodShop=&search=&page=1">products</a>
-        <a href="/foodShop/list?search=&page=1">Food Shop</a>
-        <a href="#categories">categories</a>
+        <a href="/foodShop/list?search=&page=1">food shop </a>
+        
         <a href="#review">review</a>
         <a href="#blogs">blogs</a>
       </nav>
 
       <div class="icons">
-        <a href="../page/gioHang.html">
+        <a href="/user/cart">
           <div class="fas fa-shopping-cart" id="cart-btn"></div>
         </a>
         <a href="/user/profile">
@@ -40,90 +39,59 @@
     </header>
     <!-- HEADER -->
     <!-- Body -->
-    <div class="inf">
-      <h1
-        style="
-          text-align: center;
-          margin-bottom: 30px;
-          font-size: 30px;
-          color: #130f40;
-        "
-      >
-        Thông tin cá nhân
-      </h1>
-      <div class="container">
-        <div class="grid-left">
-          <img src="/img/download.jpeg" alt="" />
-          <div class="name">
-            <h3>{{HoTen}}</h3>
-          </div>
-        </div>
-
-        <div class="grid-right">
-          <div class="contact">
-            <div class="title">
-              <h3>Lien he</h3>
-              
+    <div class="content">
+      <div class="content-top" >
+        <h1>danh sach san pham: </h1>
+        <div class="search">
+          <form action="/product/list" method="get">
+            <div class="from">
+              <p style="margin-bottom: 5px;">tim kiem</p>
+              <i class="fa-solid fa-magnifying-glass"></i>
+              <input type="hidden" name="foodShop" value="">
+              <input type="text" name="search"/>
+              <input type="hidden" name="page" value="1"/>
+              <button type="submit">Search</button>
             </div>
-            <form class="content" method="POST" action="/user/updateProfile">
-            {{#with userInfo}}
-              <p>
-                HoTen:
-                <input
-                  name="hoten"
-                  type="text"
-                  value={{#if this.HoTen}}{{this.HoTen}}{{else}}""{{/if}}
-                  style="
-                    border: 1px solid black;
-                    padding: 2px;
-                    border-radius: 5px;
-                  "
-                />
-              </p>
-              <p>
-                SDT:
-                <input
-                  name="sodienthoai"
-                  type="text"
-                  value={{#if this.SoDienThoai}}{{this.SoDienThoai}}{{else}}""{{/if}}
-                  style="
-                    border: 1px solid black;
-                    padding: 2px;
-                    border-radius: 5px;
-                  "
-                />
-              </p>
-              <p>
-                Dia chi:
-                <input
-                  name="diachi"
-                  type="text"
-                  value={{#if this.DiaChi}}{{this.DiaChi}}{{else}}""{{/if}}
-                  style="
-                    border: 1px solid black;
-                    padding: 2px;
-                    border-radius: 5px;
-                  "
-                />
-              </p>
-              <p>
-                Email:
-                <input
-                  name="email"
-                  type="text"
-                  value={{#if this.Email}}{{this.Email}}{{else}}""{{/if}}
-                  style="
-                    border: 1px solid black;
-                    padding: 2px;
-                    border-radius: 5px;
-                  "
-                />
-              </p>
-              <button type="submit">Cập nhật</button>
-            {{/with}}
-            </form>
+          </form>
           </div>
-        </div>
+      </div>
+      <div class="productList">
+        {{#each productList}}
+        <a href="/product/detail/{{this.MonID}}" class="product">
+          <img src="{{this.LinkHinhAnh}}" alt="food" />
+          <div class="product-content">
+            <h3 class="name">{{this.TenMon}}</h3>
+            <p class="status">Tình trạng: <span>{{this.TinhTrang}}</span></p>
+            <p class="price">Giá: {{this.Gia}}đ</p>
+            <p class="shop">Quán: {{this.TenChiNhanh}}</p>
+          </div>
+        </a>
+        {{/each}}
+      </div>
+      <div class="content-bottom">
+        <ul class="pagination">
+          <li>
+            <a class="button-pagination pre" href="">pre</a>
+          </li>
+          <li>
+             <a class="button-pagination page">1</a>
+          </li>
+          <li>
+             <a class="button-pagination page">2</a>
+          </li>
+          <li>
+             <a class="button-pagination page">3</a>
+          </li>
+          <li>
+             <a class="button-pagination page">4</a>
+          </li>
+          <li>
+             <a class="button-pagination page">5</a>
+          </li>
+          <li>
+             <a class="button-pagination next" href="">next</a>
+          </li>
+        </ul>
       </div>
     </div>
     <!-- Body -->
@@ -168,11 +136,11 @@
           <a href="#" class="links">
             <i class="fas fa-arrow-right"></i> features
           </a>
-          <a href="#" class="links">
+          <a href="/product/list?search=&page=1" class="links">
             <i class="fas fa-arrow-right"></i> products
           </a>
-          <a href="#" class="links">
-            <i class="fas fa-arrow-right"></i> categories
+          <a href="/foodShop/list?search=&page=1" class="links">
+            <i class="fas fa-arrow-right"></i> food shop
           </a>
           <a href="#" class="links">
             <i class="fas fa-arrow-right"></i> review
@@ -196,4 +164,33 @@
       </div>
     </section>
   </body>
+  <script>
+    const pagination = document.querySelectorAll('.button-pagination.page');
+
+    //get page from url
+    const params = new Proxy(new URLSearchParams(window.location.search), {
+      get: (searchParams, prop) => searchParams.get(prop),
+    });
+    // Get the value of "some_key" in eg "https://example.com/?some_key=some_value"
+    const foodShop = params.foodShop;
+    const currentPage = params.page;
+    const search = params.search;
+
+    //add active anh link for pagination
+    pagination.forEach((item)=>{
+      //active
+      if(parseInt(item.textContent) == currentPage){
+        item.classList.add('active');
+      }
+
+      //add link
+      const page = item.textContent;
+      item.href = `/product/list?foodShop=${foodShop}&search=${search}&page=${page}`
+    })
+
+    //add id food shop, search for input
+    document.querySelector('input[name="foodShop"]').value = params.foodShop;
+    document.querySelector('input[name="search"]').value = params.search;
+
+  </script>
 </html>

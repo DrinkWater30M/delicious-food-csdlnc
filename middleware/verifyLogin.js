@@ -1,6 +1,6 @@
 function verifyLogin(req, res, next){
     if(!req.user){
-        redirect('/user/login');
+        res.redirect('/user/login');
         return;
     }
 
