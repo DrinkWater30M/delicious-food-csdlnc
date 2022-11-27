@@ -1,0 +1,81 @@
+@import "/css/header.css";
+@import "/css/footer.css";
+@import "/css/reset.css";
+
+.detail {
+  margin: 150px auto;
+  width: 60%;
+  background-color: white;
+  padding: 10px;
+  border-radius: 10px;
+  /* font-size: 15px; */
+}
+
+.detail .content {
+  display: grid;
+  grid-template-columns: 40% 60%;
+  margin: 20px;
+  column-gap: 20px;
+}
+
+.detail .content .content-left img {
+  width: 100%;
+  height: 300px;
+  border-radius: 20px;
+}
+
+.detail .content .content-right .name {
+  margin-bottom: 25px;
+}
+
+.detail .content .content-right .quantity {
+  margin-bottom: 25px;
+}
+
+.detail .content .content-right .describe {
+  margin-bottom: 30px;
+}
+
+.detail .content .content-right .price {
+}
+
+.detail .content .content-right .name h3 {
+  font-size: 30px;
+}
+
+.detail .content .content-right .quantity h3 {
+  font-size: 30px;
+}
+
+.detail .content .content-right .quantity input {
+  border: 1px solid black;
+  padding: 3px;
+  border-radius: 4px;
+  width: 50px;
+}
+
+.detail .content .content-right .describe h3 {
+  font-size: 30px;
+}
+
+.detail .content .content-right .price h3 {
+  font-size: 30px;
+
+}
+
+.detail .content .content-right .price button {
+  color: #130f41;
+  font-size: 20px;
+  background-color: #eeeeee;
+  padding: 9px;
+  border-radius: 6px;
+  margin: 10px 10px;
+}
+
+.detail .content .content-right .price {
+  border-top: 1px solid rgb(199, 197, 197);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgb(199, 197, 197);
+}

@@ -21,6 +21,28 @@ async function getProductList(foodShop, search, page){
     }
 }
 
+// Lấy thông tin chi tiết sản phẩm
+async function getProductDetail(id) {
+    const sql = `select * from Mon where MonID = '${id}'`;
+    const detail = await sequelize.query(sql, { type: QueryTypes.SELECT });
+
+    return detail.length === 0 ? null : detail; 
+}
+
+// Thêm vào giỏ hàng
+async function addtoCart(KhachHangID, MonID, soluong) {
+    try {
+        const sql = `exec CapNhatGioHang '${KhachHangID}','${MonID}', ${soluong}`;
+        return await sequelize.query(sql);
+    }
+    catch(error){
+        console.log(error);
+    }
+}
+
+
 module.exports = {
     getProductList,
+    getProductDetail,
+    addtoCart,
 }
