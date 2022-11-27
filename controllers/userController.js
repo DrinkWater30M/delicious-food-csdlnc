@@ -104,6 +104,7 @@ async function register(req, res){
     catch(error){
         console.log(error);
     }
+
 }
 module.exports = {
     getLoginPage,
