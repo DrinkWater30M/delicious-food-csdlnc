@@ -175,12 +175,13 @@ go
 
 create table ChiTietGioHang
 (
+	GioHangID char(50),
 	KhachHangID char(50),
 	MonID char(50),
 	SoLuong int,
 	TrangThai nvarchar(20)
 
-	constraint pkGioHang primary key(KhachHangID, MonID)
+	constraint pkGioHang primary key(GioHangID)
 )
 go
 
@@ -474,27 +475,27 @@ values('mon01',N'Bánh tráng nướng',N'abc',10000,N'Còn','thucdon01', 'https
 
 
 INSERT INTO ChiTietGioHang values
-('kh01', 'mon01', 10, N'Đã Thêm'),
-('kh01', 'mon02', 10, N'Đã Thêm'),
-('kh01', 'mon03', 10, N'Đã Thêm'),
-('kh01', 'mon04', 10, N'Đã Thêm'),
-('kh01', 'mon05', 10, N'Đã Thêm'),
-('kh02', 'mon06', 10, N'Đã Thêm'),
-('kh02', 'mon07', 10, N'Đã Thêm'),
-('kh02', 'mon08', 10, N'Đã Thêm'),
-('kh03', 'mon09', 10, N'Đã Thêm'),
-('kh03', 'mon10', 10, N'Đã Thêm'),
-('kh04', 'mon11', 10, N'Đã Thêm'),
-('kh04', 'mon12', 10, N'Đã Thêm'),
-('kh04', 'mon13', 10, N'Đã Thêm'),
-('kh05', 'mon14', 10, N'Đã Thêm'),
-('kh05', 'mon15', 10, N'Đã Thêm'),
-('kh05', 'mon16', 10, N'Đã Thêm'),
-('kh05', 'mon17', 10, N'Đã Thêm'),
-('kh05', 'mon18', 10, N'Đã Thêm'),
-('kh06', 'mon19', 10, N'Đã Thêm'),
-('kh06', 'mon20', 10, N'Đã Thêm'),
-('kh06', 'mon21', 10, N'Đã Thêm')
+('gh01', 'kh01', 'mon02', 10, N'Đã Thêm'),
+('gh02', 'kh01', 'mon03', 10, N'Đã Thêm'),
+('gh03', 'kh01', 'mon01', 10, N'Đã Thêm'),
+('gh04', 'kh01', 'mon04', 10, N'Đã Thêm'),
+('gh05', 'kh01', 'mon05', 10, N'Đã Thêm'),
+('gh06', 'kh02', 'mon06', 10, N'Đã Thêm'),
+('gh07', 'kh02', 'mon07', 10, N'Đã Thêm'),
+('gh08', 'kh02', 'mon08', 10, N'Đã Thêm'),
+('gh09', 'kh03', 'mon09', 10, N'Đã Thêm'),
+('gh10', 'kh03', 'mon10', 10, N'Đã Thêm'),
+('gh11', 'kh04', 'mon11', 10, N'Đã Thêm'),
+('gh12', 'kh04', 'mon12', 10, N'Đã Thêm'),
+('gh13', 'kh04', 'mon13', 10, N'Đã Thêm'),
+('gh14', 'kh05', 'mon14', 10, N'Đã Thêm'),
+('gh15', 'kh05', 'mon15', 10, N'Đã Thêm'),
+('gh16', 'kh05', 'mon16', 10, N'Đã Thêm'),
+('gh17', 'kh05', 'mon17', 10, N'Đã Thêm'),
+('gh18', 'kh05', 'mon18', 10, N'Đã Thêm'),
+('gh19', 'kh06', 'mon19', 10, N'Đã Thêm'),
+('gh20', 'kh06', 'mon20', 10, N'Đã Thêm'),
+('gh21', 'kh06', 'mon21', 10, N'Đã Thêm')
 
 
 INSERT INTO Quan
@@ -524,16 +525,16 @@ values('chinhanh01',N'Tam Mao',N'33 Cao Thắng Quận 1 HCM','07:00','20:00','q
 
 
 insert into DonHang(NguoiNhan, SoDienThoai, DiaChiNhanHang, NgayDatHang, PhiSanPham, PhiVanChuyen, TrangThai, KhachHangID, TaiXeID)
-values('abc','0987654321','123 nguyễn văn cừ quận 5 hcm','20221022',10000,15000,'dang van chuyen','kh01','tx01'),
-('abc','0987654321','123 nguyễn văn cừ quận 5 hcm','20221022',10000,15000,'dang van chuyen','kh02','tx02'),
-('abc','0987654321','123 nguyễn văn cừ quận 5 hcm','20221022',10000,15000,'dang van chuyen','kh03','tx03'),
-('abc','0987654321','123 nguyễn văn cừ quận 5 hcm','20221022',10000,15000,'dang van chuyen','kh04','tx04'),
-('abc','0987654321','123 nguyễn văn cừ quận 5 hcm','20221022',10000,15000,'dang van chuyen','kh05','tx05'),
-('abc','0987654321','123 nguyễn văn cừ quận 5 hcm','20221022',10000,15000,'dang van chuyen','kh06','tx06'),
-('abc','0987654321','123 nguyễn văn cừ quận 5 hcm','20221022',10000,15000,'dang van chuyen','kh07','tx07'),
-('abc','0987654321','123 nguyễn văn cừ quận 5 hcm','20221022',10000,15000,'dang van chuyen','kh08','tx08'),
-('abc','0987654321','123 nguyễn văn cừ quận 5 hcm','20221022',10000,15000,'dang van chuyen','kh09','tx09'),
-('abc','0987654321','123 nguyễn văn cừ quận 5 hcm','20221022',10000,15000,'dang van chuyen','kh10','tx10')
+values('abc','0987654321','123 nguyễn văn cừ quận 5 hcm','20221022',10000,15000,N'Đang Giao','kh01','tx01'),
+('abc','0987654321','123 nguyễn văn cừ quận 5 hcm','20221022',10000,15000,N'Đang Giao','kh02','tx02'),
+('abc','0987654321','123 nguyễn văn cừ quận 5 hcm','20221022',10000,15000,N'Đang Giao','kh03','tx03'),
+('abc','0987654321','123 nguyễn văn cừ quận 5 hcm','20221022',10000,15000,N'Đang Giao','kh04','tx04'),
+('abc','0987654321','123 nguyễn văn cừ quận 5 hcm','20221022',10000,15000,N'Đang Giao','kh05','tx05'),
+('abc','0987654321','123 nguyễn văn cừ quận 5 hcm','20221022',10000,15000,N'Đang Giao','kh06','tx06'),
+('abc','0987654321','123 nguyễn văn cừ quận 5 hcm','20221022',10000,15000,N'Đang Giao','kh07','tx07'),
+('abc','0987654321','123 nguyễn văn cừ quận 5 hcm','20221022',10000,15000,N'Đang Giao','kh08','tx08'),
+('abc','0987654321','123 nguyễn văn cừ quận 5 hcm','20221022',10000,15000,N'Đang Giao','kh09','tx09'),
+('abc','0987654321','123 nguyễn văn cừ quận 5 hcm','20221022',10000,15000,N'Đang Giao','kh10','tx10')
 
 insert into ChiTietDonHang
 values('mon01',1 ,3,10000,'abc','5 sao'),

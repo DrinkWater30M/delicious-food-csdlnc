@@ -3,12 +3,12 @@ use ESHOPPING
 go
 
 create PROC CapNhatGioHang
-	@makh char(50), @idmon  char(50), @soluong int
+	@magh char(50), @makh char(50), @idmon  char(50), @soluong int
 AS
 BEGIN TRANSACTION
 	begin try
 	--Kiem tra ton tai tai khoan
-		IF EXISTS (SELECT * FROM ChiTietGioHang WHERE KhachHangID = @makh and MonID = @idmon)
+		IF EXISTS (SELECT * FROM ChiTietGioHang WHERE KhachHangID = @makh and MonID = @idmon and TrangThai = N'Đã Thêm')
 			BEGIN
 				update ChiTietGioHang set SoLuong = SoLuong + @soluong where  KhachHangID = @makh and MonID = @idmon			
 				commit
@@ -16,7 +16,7 @@ BEGIN TRANSACTION
 			END
 		ELSE
 			begin 
-				insert into ChiTietGioHang values (@makh , @idmon, @soluong)
+				insert into ChiTietGioHang values (@magh, @makh , @idmon, @soluong, N'Đã Thêm')
 				commit
 				return 1
 			end
