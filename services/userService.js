@@ -77,7 +77,39 @@ async function addAccount(username, hashPassword){
     }
 }
 
+async function showCart(id){
+    try{
+        const sql = `select m.MonID, m.TenMon, m.Gia, ct.SoLuong from ChiTietGioHang ct, MON m where ct.KhachHangID = '${id}' and ct.MonID = m.MonID`
+        
+        return await sequelize.query(sql);
+    }
+    catch(error){
+        console.log(error);
+    }
+}
 
+async function themDonHang(nguoinhan, sdt, diachi, phisanpham, id){
+    try{
+        const sql = `insert into DonHang(NguoiNhan, SoDienThoai, DiaChiNhanHang, NgayDatHang, PhiSanPham, PhiVanChuyen, TrangThai, KhachHangID)
+        values ('${nguoinhan}', '${sdt}', '${diachi}', CAST(GETDATE() AS DATE), ${phisanpham}, 15000, 'Chờ nhận', '${id}')`
+        
+        return await sequelize.query(sql);
+    }
+    catch(error){
+        console.log(error);
+    }
+}
+
+async function themChiTietDonHang(idmon, soluong, gia){
+    try{
+        const sql = `exec ThemChiTietDonHang '${idmon}', ${soluong}, ${gia}`;
+        
+        return await sequelize.query(sql);
+    }
+    catch(error){
+        console.log(error);
+    }
+}
 
 module.exports = {
     getInfoByUserName,
@@ -85,4 +117,7 @@ module.exports = {
     getAccount,
     addAccount,
     updateProfile,
+    showCart,
+    themDonHang,
+    themChiTietDonHang
 }
