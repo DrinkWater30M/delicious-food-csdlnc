@@ -178,6 +178,7 @@ create table ChiTietGioHang
 	KhachHangID char(50),
 	MonID char(50),
 	SoLuong int,
+	TrangThai nvarchar(20)
 
 	constraint pkGioHang primary key(KhachHangID, MonID)
 )
@@ -473,27 +474,27 @@ values('mon01',N'Bánh tráng nướng',N'abc',10000,N'Còn','thucdon01', 'https
 
 
 INSERT INTO ChiTietGioHang values
-('kh01', 'mon01', 10),
-('kh01', 'mon02', 10),
-('kh01', 'mon03', 10),
-('kh01', 'mon04', 10),
-('kh01', 'mon05', 10),
-('kh02', 'mon06', 10),
-('kh02', 'mon07', 10),
-('kh02', 'mon08', 10),
-('kh03', 'mon09', 10),
-('kh03', 'mon10', 10),
-('kh04', 'mon11', 10),
-('kh04', 'mon12', 10),
-('kh04', 'mon13', 10),
-('kh05', 'mon14', 10),
-('kh05', 'mon15', 10),
-('kh05', 'mon16', 10),
-('kh05', 'mon17', 10),
-('kh05', 'mon18', 10),
-('kh06', 'mon19', 10),
-('kh06', 'mon20', 10),
-('kh06', 'mon21', 10)
+('kh01', 'mon01', 10, N'Đã Thêm'),
+('kh01', 'mon02', 10, N'Đã Thêm'),
+('kh01', 'mon03', 10, N'Đã Thêm'),
+('kh01', 'mon04', 10, N'Đã Thêm'),
+('kh01', 'mon05', 10, N'Đã Thêm'),
+('kh02', 'mon06', 10, N'Đã Thêm'),
+('kh02', 'mon07', 10, N'Đã Thêm'),
+('kh02', 'mon08', 10, N'Đã Thêm'),
+('kh03', 'mon09', 10, N'Đã Thêm'),
+('kh03', 'mon10', 10, N'Đã Thêm'),
+('kh04', 'mon11', 10, N'Đã Thêm'),
+('kh04', 'mon12', 10, N'Đã Thêm'),
+('kh04', 'mon13', 10, N'Đã Thêm'),
+('kh05', 'mon14', 10, N'Đã Thêm'),
+('kh05', 'mon15', 10, N'Đã Thêm'),
+('kh05', 'mon16', 10, N'Đã Thêm'),
+('kh05', 'mon17', 10, N'Đã Thêm'),
+('kh05', 'mon18', 10, N'Đã Thêm'),
+('kh06', 'mon19', 10, N'Đã Thêm'),
+('kh06', 'mon20', 10, N'Đã Thêm'),
+('kh06', 'mon21', 10, N'Đã Thêm')
 
 
 INSERT INTO Quan
