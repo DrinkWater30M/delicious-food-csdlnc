@@ -1,0 +1,124 @@
+@import "/css/header.css";
+@import "/css/footer.css";
+@import "/css/reset.css";
+
+.pay {
+  margin-top: 120px;
+  font-size: 20px;
+}
+
+.content-table {
+  border-collapse: collapse;
+  margin: 25px 0;
+  font-size: 0.9em;
+  min-width: 400px;
+  border-radius: 5px 5px 0 0;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.content-table thead tr {
+  background-color: #ff7800;
+  color: #ffffff;
+  text-align: left;
+  font-weight: bold;
+}
+
+.content-table th,
+.content-table td {
+  padding: 12px 15px;
+  text-align: center;
+}
+
+.content-table tbody tr {
+  border-bottom: 1px solid #dddddd;
+}
+
+.content-table tbody tr:nth-of-type(even) {
+  background-color: #f3f3f3;
+}
+
+.content-table tbody tr:last-of-type {
+  border-bottom: 2px solid #ff7800;
+}
+
+.content-table tbody tr.active-row {
+  font-weight: bold;
+  color: #ff7800;
+}
+
+.pay .total {
+  background-color: white;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  margin-top: 10px;
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 80%;
+  margin-left: 10%;
+  margin-bottom: 50px;
+}
+
+.btn-thanhtoan {
+  margin-top: 10px;
+  font-size: 14px;
+  color: white;
+  padding: 10px 20px;
+  background-color: rgb(246, 35, 35);
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.thongTinGiaoHang{
+  width: 80%;
+ background-color: white;
+ margin: 0 auto;
+ padding: 15px;
+ margin-top: 5px;
+}
+
+.thongTinGiaoHang h3{
+text-align: center;
+margin-bottom: 15px;
+}
+
+.thongTinGiaoHang form{
+  margin-left: 30%;
+}
+
+.thongTinGiaoHang form .tenNguoiNhan input{
+  background-color: #eeeeee;
+  width: 300px;
+  margin-left: 40px;
+  padding: 10px 30px 10px 10px;
+  border-radius: 7px;
+}
+
+.thongTinGiaoHang form .sdtNguoiNhan{
+  margin-top: 5px;
+}
+
+
+.thongTinGiaoHang form .sdtNguoiNhan input{
+  background-color: #eeeeee;
+  width: 300px;
+  margin-left: 145px;
+  padding: 10px 30px 10px 10px;
+  border-radius: 7px;
+
+}
+
+
+.thongTinGiaoHang form .diaChiNguoiNhan{
+  margin-top: 5px;
+}
+
+.thongTinGiaoHang form .diaChiNguoiNhan input{
+  background-color: #eeeeee;
+  width: 300px;
+  margin-left: 120px;
+  padding: 10px 30px 10px 10px;
+  border-radius: 7px;
+}
