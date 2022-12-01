@@ -106,6 +106,52 @@ async function register(req, res){
     }
 
 }
+
+async function showThanhtoan(req, res) {
+    try {
+        const id = req.user.KhachHangID;
+        const giohang = await userService.showCart(id)
+        let sum = giohang[0]
+        let phisanpham = 0;
+        sum.forEach(function (item, index) {
+            phisanpham += item.Gia * item.SoLuong;
+        });
+        res.render('userView/payment', {giohang: giohang[0], phisanpham: phisanpham});
+    }
+    catch(err){
+        console.log(err);
+    }
+}
+
+async function xulithanhtoan(req, res){
+    try {
+        const id = req.user.KhachHangID;
+        let giohang = await userService.showCart(id)
+        const nguoinhan = req.body.name;
+        const sdt = req.body.sdt;
+        const diachi = req.body.diachi;
+        let phisanpham = 0;
+        giohang = giohang[0];
+        // Tính phí sản phẩm
+        giohang.forEach(function (item, index) {
+            phisanpham += item.Gia * item.SoLuong;
+        });
+        // Thêm đơn hàng
+        const add = await userService.themDonHang(nguoinhan, sdt, diachi, phisanpham, id)
+        var bool = add[1];
+
+        // Gọi hàm thêm chi tiết đơn hàng
+        giohang.forEach(function (item, index) {
+            userService.themChiTietDonHang(item.MonID, item.SoLuong, item.Gia);
+        });
+        if (!add) res.render('userView/payment', {giohang: giohang[0], phisanpham: phisanpham, status: "Thanh toán đơn hàng không thành công!"});
+        else
+        res.redirect('/');
+    }
+    catch(err){
+        console.log(err);
+    }
+}
 module.exports = {
     getLoginPage,
     login,
@@ -114,4 +160,6 @@ module.exports = {
     getProfilePage,
     getUpdateProfilePage,
     updateProfile,
+    showThanhtoan,
+    xulithanhtoan,
 }

@@ -34,4 +34,9 @@ router.get('/register', userController.getRegisterPage);
 // POST register
 router.post('/register', userController.register);
 
+// page Thanh toán
+router.get('/thanhtoan', middleware.verifyLogin, userController.showThanhtoan)
+// Xử lý thanh toán
+router.post('/xulithanhtoan', middleware.verifyLogin, userController.xulithanhtoan)
+
 module.exports = router;
