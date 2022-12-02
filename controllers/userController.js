@@ -152,6 +152,51 @@ async function xulithanhtoan(req, res){
         console.log(err);
     }
 }
+
+async function getShoppingCart(req, res){
+    try{
+        //get id from request
+        const KhachHangID = req.user.KhachHangID;
+        const userInfo = await userService.getShoppingCartByID(KhachHangID);
+
+        // const info = userInfo[0];
+        //
+        res.render('userView/shoppingcart.hbs', { userInfo});
+    
+    }
+    catch(error){
+        console.log(error);
+    }
+}
+
+async function deleteAtShoppingCart(req, res, next){
+    try{
+        const MonID = req.params.id;
+        const KhachHangID = req.user.KhachHangID;
+        userService.deleteShoppingCartByID(MonID, KhachHangID);
+        res.redirect('back');
+    }
+    catch(error){
+        console.log(error);
+    }
+}
+
+async function getPurchase(req, res){
+    try{
+        //get id from request
+        const KhachHangID = req.user.KhachHangID;
+        const search =  req.query.search;
+        const purchase = await userService.getPurchaseByID(KhachHangID, search);
+
+        // const info = userInfo[0];
+        //
+        res.render('userView/purchase.hbs', { purchase});
+    
+    }
+    catch(error){
+        console.log(error);
+    }
+}
 module.exports = {
     getLoginPage,
     login,
@@ -162,4 +207,7 @@ module.exports = {
     updateProfile,
     showThanhtoan,
     xulithanhtoan,
+    getShoppingCart,
+    deleteAtShoppingCart,
+    getPurchase,
 }
