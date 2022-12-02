@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="/css/danhSachDonHang.css" />
+    <link rel="stylesheet" href="/css/gioHang.css" />
     <!-- cdn bootstrap -->
     <link
       rel="stylesheet"
@@ -15,16 +15,14 @@
   <body>
     <!-- HEADER -->
     <header class="header">
-      <a href="#" class="logo">
+      <a href="/" class="logo">
         <i class="fas fa-shopping-basket"></i> groco
       </a>
       <nav class="navbar">
-        <a href="/">home</a>
+        <a href="#home">home</a>
         <a href="/user/purchase">all bill</a>
-
         <a href="../page/danhSachSanPham.html">products</a>
-
-        <a href="../page/danhSachDoiTac.html">food shop</a>
+        <a href="./page/danhSachDoiTac.html">food shop</a>
         <a href="#review">review</a>
         <a href="#blogs">blogs</a>
       </nav>
@@ -40,47 +38,51 @@
     </header>
     <!-- HEADER -->
     <!-- Body -->
+    <div class="cart">
+      <h1 style="text-align: center; margin-bottom: 30px; font-size: 30px">
+        Gio hang
+      </h1>
 
-    <div class="partner" style="margin: 150px">
-      <div class="content-top">
-        <h1 style="margin-left: 40px">danh sach don hang</h1>
-        <div class="search">
-          <form action="/user/purchase" method="get">
-            <div class="from">
-              <p style="margin-bottom: 5px;">tim kiem</p>
-              <i class="fa-solid fa-magnifying-glass"></i>
-              <input type="text" name="search"/>
-              <button type="submit">Search</button>
-            </div>
-          </form>
-        </div>
-      </div>
-      <div class="content">
-        {{#each purchase}}
-        <a href="/product/detail/{{this.MonID}}" class="product"></a>
-        <div class="item">
-          <div class="left">
-            <img src={{this.LinkHinhAnh}} alt="purchase" />
-            <div class="title">
-              <h3>{{this.TenMon}}</h3>
-              <p>Mã đơn hàng: {{this.DonHangID}}</p>
-              <p>Người nhận: {{this.NguoiNhan}}</p>
-              <p>Số điện thoại: {{this.SDT}}</p>
-              <p>Địa chỉ nhận hàng: {{this.DiaChiNhanHang}}</p>
-              <p>Tên tài xế: {{this.HoTen}} </p>
-              <p>Biển số xe: {{this.BienSoXe}} </p>
-              <p>Số điện thoại: {{this.SoDienThoai}} </p>
-            </div>
-          </div>
-          <div class="right-active">
-            <p>{{this.TrangThai}}</p>
-          </div>
-        </div>
-        {{/each}}
-      </div>
-      <!--  -->
+     <table class="content-table" style="margin: 0 10%; width: 80%;">
+        <thead>
+          <tr>
+            <th>STD</th>
+            <th>Name</th>
+            <th>Quality</th>
+            <th>Price</th>
+            <th>Setting</th>
+          </tr>
+        </thead>
+        <tbody>
+          <script>
+              var stt = 1;
+          </script>
+          {{#each cart}}
+          <tr>
+            <td>
+              <script>
+                document.write(stt);
+                stt += 1;
+              </script>
+            </td>
+            <td>{{this.TenMon}}</td>
+            <td>
+            <input type="text" style="width: 30px;" value={{this.SoLuong}}>
+            </td>
+            <td>{{this.Gia}} </td>
+             <td>
+              <a href="/user/shoppingcart/delete/{{this.MonID}}" class="btn-xoa">Delete</a>
+             </td>
+          </tr>
+         {{/each}}
+        </tbody>
+      </table>
 
-    </div>
+      <div class="thanhToan">
+        <p class="title" style="color: rgb(255, 85, 0);">kiem tra don hang truoc khi thanh toans</p>
+        <a class="btn-thanhtoan" href="../page/thanhToan.html">thanh toan</a>
+      </div>
+
     <!-- Body -->
     <!-- FOOTER -->
     <section class="footer">
@@ -120,8 +122,8 @@
           <a href="#" class="links">
             <i class="fas fa-arrow-right"></i> home
           </a>
-          <a href="/user/purchase" class="links">
-            <i class="fas fa-arrow-right"></i> All Bill
+          <a href="#" class="links">
+            <i class="fas fa-arrow-right"></i> features
           </a>
           <a href="#" class="links">
             <i class="fas fa-arrow-right"></i> products
@@ -136,12 +138,13 @@
             <i class="fas fa-arrow-right"></i> blogs
           </a>
         </div>
+
         <div class="box">
           <h3>newsletter</h3>
           <p>subscribe for latest updates</p>
           <input type="email" placeholder="your email" class="email" />
           <input type="submit" value="subscribe" class="btn" />
-          <img src="img/banner-bg.webp" class="payment-img" alt="" />
+          <img src="./assets/img/banner-bg.webp" class="payment-img" alt="" />
         </div>
       </div>
 
@@ -150,19 +153,4 @@
       </div>
     </section>
   </body>
-  <script>
-    //get page from url
-    const params = new Proxy(new URLSearchParams(window.location.search), {
-      get: (searchParams, prop) => searchParams.get(prop),
-    });
-    // Get the value of "some_key" in eg "https://example.com/?some_key=some_value"
-    const search = params.search;
-
-      //add link
-      item.href = `/list?&search=${search}`
-
-    //add id food shop, search for input
-    document.querySelector('input[name="search"]').value = params.search;
-
-  </scrip>
 </html>

@@ -157,11 +157,9 @@ async function getShoppingCart(req, res){
     try{
         //get id from request
         const KhachHangID = req.user.KhachHangID;
-        const userInfo = await userService.getShoppingCartByID(KhachHangID);
+        const cart = await userService.getShoppingCartByID(KhachHangID);
 
-        // const info = userInfo[0];
-        //
-        res.render('userView/shoppingcart.hbs', { userInfo});
+        res.render('userView/shoppingcart.hbs', { cart});
     
     }
     catch(error){
