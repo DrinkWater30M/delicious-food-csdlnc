@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="/css/thongTinCaNhan.css" />
+    <link rel="stylesheet" href="/css/gioHang.css" />
     <!-- cdn bootstrap -->
     <link
       rel="stylesheet"
@@ -15,7 +15,7 @@
   <body>
     <!-- HEADER -->
     <header class="header">
-      <a href="#" class="logo">
+      <a href="/" class="logo">
         <i class="fas fa-shopping-basket"></i> groco
       </a>
       <nav class="navbar">
@@ -23,7 +23,6 @@
         <a href="/user/purchase">all bill</a>
         <a href="/product/list?foodShop=&search=&page=1">products</a>
         <a href="/foodShop/list?search=&page=1">Food Shop</a>
-        <a href="#categories">categories</a>
         <a href="#review">review</a>
         <a href="#blogs">blogs</a>
       </nav>
@@ -39,66 +38,51 @@
     </header>
     <!-- HEADER -->
     <!-- Body -->
-    <div class="inf">
-      <h1
-        style="
-          text-align: center;
-          margin-bottom: 30px;
-          font-size: 30px;
-          color: #130f40;
-        "
-      >
-        Thông tin cá nhân
+    <div class="cart">
+      <h1 style="text-align: center; margin-bottom: 30px; font-size: 30px">
+        Gio hang
       </h1>
-      <div class="container">
-        {{#with userInfo}}
-        <div class="grid-left">
-          <img src="/img/download.jpeg" alt="" />
-          <div class="name">
-            <h3>
-              {{#if this.HoTen}}
-                {{this.HoTen}}
-              {{else}}
-                Chưa Cập Nhật
-              {{/if}}
-            </h3>
-          </div>
-        </div>
 
-        <div class="grid-right">
-          <div class="contact">
-            <div class="title">
-              <h3>Lien he</h3>
-              <a href="/user/updateProfile">Chỉnh sửa</a>
-            </div>
-            <div class="content">
-              <p>SDT: <span style="padding-left: 33px">
-                {{#if this.SoDienThoai}}
-                  {{this.SoDienThoai}}
-                {{else}}
-                  Chưa Cập Nhật
-                {{/if}}
-              </span> </p>
-              <p>Dia chi: <span style="margin-left: 10px;">
-                {{#if this.DiaChi}}
-                  {{this.DiaChi}}
-                {{else}}
-                  Chưa Cập Nhật
-                {{/if}}
-              </span></p>
-              <p>Email: <span style="margin-left: 25px;">
-                {{#if this.Email}}
-                  {{this.Email}}
-                {{else}}
-                  Chưa Cập Nhật
-                {{/if}}
-              </span></p>
-            </div>
-          </div>
-        </div>
-        {{/with}}
+     <table class="content-table" style="margin: 0 10%; width: 80%;">
+        <thead>
+          <tr>
+            <th>STD</th>
+            <th>Name</th>
+            <th>Quality</th>
+            <th>Price</th>
+            <th>Setting</th>
+          </tr>
+        </thead>
+        <tbody>
+          <script>
+              var stt = 1;
+          </script>
+          {{#each cart}}
+          <tr>
+            <td>
+              <script>
+                document.write(stt);
+                stt += 1;
+              </script>
+            </td>
+            <td>{{this.TenMon}}</td>
+            <td>
+            <input type="text" style="width: 30px;" value={{this.SoLuong}}>
+            </td>
+            <td>{{this.Gia}} </td>
+             <td>
+              <a href="/user/shoppingcart/delete/{{this.MonID}}" class="btn-xoa">Delete</a>
+             </td>
+          </tr>
+         {{/each}}
+        </tbody>
+      </table>
+
+      <div class="thanhToan">
+        <p class="title" style="color: rgb(255, 85, 0);">kiem tra don hang truoc khi thanh toans</p>
+        <a class="btn-thanhtoan" href="/user/thanhtoan">thanh toan</a>
       </div>
-    </div>
+
     <!-- Body -->
     <!-- FOOTER -->
     <section class="footer">
@@ -139,7 +123,7 @@
             <i class="fas fa-arrow-right"></i> home
           </a>
           <a href="/user/purchase" class="links">
-            <i class="fas fa-arrow-right"></i> all bill
+            <i class="fas fa-arrow-right"></i> All Bill
           </a>
           <a href="#" class="links">
             <i class="fas fa-arrow-right"></i> products
@@ -160,7 +144,7 @@
           <p>subscribe for latest updates</p>
           <input type="email" placeholder="your email" class="email" />
           <input type="submit" value="subscribe" class="btn" />
-          <img src="/img/banner-bg.webp" class="payment-img" alt="" />
+          <img src="./assets/img/banner-bg.webp" class="payment-img" alt="" />
         </div>
       </div>
 

@@ -111,6 +111,61 @@ async function themChiTietDonHang(idmon, soluong, gia){
     }
 }
 
+async function getShoppingCartByID(KhachHangID){
+    try{
+        const sql = `select M.TenMon, CTGH.SoLuong, M.Gia, CTGH.MonID
+                    from ChiTietGioHang CTGH, Mon M
+                    where CTGH.KhachHangID = '${KhachHangID}' and CTGH.MonID = M.MonID`;
+        
+        const cart = await sequelize.query(sql,  { type: QueryTypes.SELECT });
+
+        return cart.length === 0 ? null : cart;
+    }
+    catch(error){
+        console.log(error);
+    }
+}
+
+async function deleteShoppingCartByID(MonID, KhachHangID){
+    try{
+        const sql = `delete from  ChiTietGioHang
+                    where KhachHangID = '${KhachHangID}' and MonID = '${MonID}'`;
+        
+         await sequelize.query(sql,  { type: QueryTypes.DELETE });
+
+    }
+    catch(error){
+        console.log(error);
+    }
+}
+
+async function getPurchaseByID(KhachHangID, search){
+    try{
+        if (search === undefined){
+            sql = `select DH.NguoiNhan, DH.SoDienThoai as SDT, DH. NgayDatHang, DH.TrangThai, DH.DiaChiNhanHang, M.TenMon, M.LinkHinhAnh,
+            M.MonID, DH.DonHangID, TX.HoTen, TX.BienSoXe, TX.SoDienThoai
+            from DonHang DH left join TaiXe TX on DH.TaiXeID = TX.TaiXeID, Mon M, ChiTietDonHang CTDH
+            where DH.KhachHangID = '${KhachHangID}' and DH.DonHangID = CTDH.DonHangID and CTDH.MonID = M.MonID
+            order by NgayDatHang desc`;
+        
+            purchase = await sequelize.query(sql,  { type: QueryTypes.SELECT });
+        }
+        else{
+             sql = `select DH.NguoiNhan, DH.SoDienThoai as SDT, DH. NgayDatHang, DH.TrangThai, DH.DiaChiNhanHang, M.TenMon, M.LinkHinhAnh,
+             M.MonID, DH.DonHangID, TX.HoTen, TX.BienSoXe, TX.SoDienThoai
+             from DonHang DH left join TaiXe TX on DH.TaiXeID = TX.TaiXeID, Mon M, ChiTietDonHang CTDH
+             where DH.KhachHangID = '${KhachHangID}' and DH.DonHangID = CTDH.DonHangID and CTDH.MonID = M.MonID and M.TenMon like N'%${search}%'
+             order by NgayDatHang DESC`;
+            purchase = await sequelize.query(sql,  { type: QueryTypes.SELECT });
+        }
+        
+        return purchase.length === 0 ? null : purchase;
+    }
+    catch(error){
+        console.log(error);
+    }
+}
+
 module.exports = {
     getInfoByUserName,
     getInfoByID,
@@ -119,5 +174,8 @@ module.exports = {
     updateProfile,
     showCart,
     themDonHang,
-    themChiTietDonHang
+    themChiTietDonHang,
+    getShoppingCartByID,
+    deleteShoppingCartByID,
+    getPurchaseByID,
 }
