@@ -4,10 +4,18 @@ function verifyLogin(req, res, next){
         return;
     }
 
-    res.locals.user = {...req.user};
     return next(); 
+}
+
+function assignUser(req, res, next){
+    if(req.user){
+        res.locals.user = {...req.user};
+    }
+    
+    next();
 }
 
 module.exports = {
     verifyLogin,
+    assignUser
 }

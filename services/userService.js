@@ -79,7 +79,7 @@ async function addAccount(username, hashPassword){
 
 async function showCart(id){
     try{
-        const sql = `select m.MonID, m.TenMon, m.Gia, ct.SoLuong from ChiTietGioHang ct, MON m where ct.KhachHangID = '${id}' and ct.MonID = m.MonID`
+        const sql = `select m.*, ct.SoLuong from ChiTietGioHang ct, MON m where ct.KhachHangID = '${id}' and ct.MonID = m.MonID`
         
         return await sequelize.query(sql);
     }
@@ -91,7 +91,7 @@ async function showCart(id){
 async function themDonHang(nguoinhan, sdt, diachi, phisanpham, id){
     try{
         const sql = `insert into DonHang(NguoiNhan, SoDienThoai, DiaChiNhanHang, NgayDatHang, PhiSanPham, PhiVanChuyen, TrangThai, KhachHangID)
-        values ('${nguoinhan}', '${sdt}', '${diachi}', CAST(GETDATE() AS DATE), ${phisanpham}, 15000, 'Chờ nhận', '${id}')`
+        values ('${nguoinhan}', '${sdt}', '${diachi}', CAST(GETDATE() AS DATE), ${phisanpham}, 15000, N'Chờ nhận', '${id}')`
         
         return await sequelize.query(sql);
     }
@@ -113,7 +113,7 @@ async function themChiTietDonHang(idmon, soluong, gia){
 
 async function getShoppingCartByID(KhachHangID){
     try{
-        const sql = `select M.TenMon, CTGH.SoLuong, M.Gia, CTGH.MonID
+        const sql = `select M.*, CTGH.SoLuong, M.Gia, CTGH.MonID
                     from ChiTietGioHang CTGH, Mon M
                     where CTGH.KhachHangID = '${KhachHangID}' and CTGH.MonID = M.MonID`;
         

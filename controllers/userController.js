@@ -146,7 +146,7 @@ async function xulithanhtoan(req, res){
         });
         if (!add) res.render('userView/payment', {giohang: giohang[0], phisanpham: phisanpham, status: "Thanh toán đơn hàng không thành công!"});
         else
-        res.redirect('/');
+        res.redirect('/user/thanhtoan?checkout=true');
     }
     catch(err){
         console.log(err);
