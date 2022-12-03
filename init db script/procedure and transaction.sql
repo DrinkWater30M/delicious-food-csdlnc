@@ -1,5 +1,5 @@
 ﻿--Cập nhật giỏ hàng
-use ESHOPPING
+use ESHOPPING_CSDLNC
 go
 
 create PROC CapNhatGioHang

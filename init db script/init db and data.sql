@@ -2,13 +2,13 @@
 use master
 go
 
-drop database if exists ESHOPPING
+drop database if exists ESHOPPING_CSDLNC
 go
 
-create database ESHOPPING
+create database ESHOPPING_CSDLNC
 go
 
-use ESHOPPING
+use ESHOPPING_CSDLNC
 go
 
 create table QuanTri
@@ -40,7 +40,7 @@ create table KhachHang
 	KhachHangID char(50),
 	HoTen nvarchar(50),
 	SoDienThoai char(10),
-	DiaChi Text,
+	DiaChi nText,
 	Email varchar(50),
 	TKNganHangID char(50),
 	Username varchar(50),
@@ -56,7 +56,7 @@ create table DoiTac
 	NguoiDaiDien nvarchar(50),
 	SoLuongQuan int,
 	SoLuongDonDuKien int,
-	DiaChiKinhDoanh text,
+	DiaChiKinhDoanh ntext,
 	SoDienThoai char(10),
 	TrangThai nvarchar(20),
 	Username varchar(50),
@@ -71,9 +71,9 @@ create table TaiXe
 	HoTen nvarchar(50),
 	CMND varchar(20),
 	SoDienThoai char(10),
-	DiaChi text,
+	DiaChi ntext,
 	BienSoXe varchar(10),
-	KhuVucHoatDong text,
+	KhuVucHoatDong ntext,
 	Email varchar(50),
 	TKNganHangID char(50),
 	Username varchar(50),
@@ -97,7 +97,7 @@ create table TaiKhoanNganHang
 	TKNganHangID char(50),
 	SoTaiKhoan varchar(20),
 	NganHang nvarchar(20),
-	ChiNhanh text,
+	ChiNhanh ntext,
 
 	constraint pkTaiKhoanNganHang primary key(TKNganHangID)
 )
@@ -163,7 +163,7 @@ create table Mon
 (
 	MonID char(50),
 	TenMon nvarchar(50),
-	MieuTaMon text,
+	MieuTaMon ntext,
 	Gia int,
 	TinhTrang nvarchar(20),
 	ThucDonID char(50),
@@ -190,7 +190,7 @@ create table DonHang
 	DonHangID int identity(1,1),
 	NguoiNhan nvarchar(50),
 	SoDienThoai char(10),
-	DiaChiNhanHang text,
+	DiaChiNhanHang ntext,
 	NgayDatHang date,
 	PhiSanPham int,
 	PhiVanChuyen int,
@@ -208,7 +208,7 @@ create table ChiTietDonHang
 	DonHangID int,
 	SoLuong int,
 	GiaBan int,
-	GhiChuTuyChon text,
+	GhiChuTuyChon ntext,
 	DanhGia nvarchar(20),
 
 	constraint pkChiTietDonHang primary key(MonID, DonHangID)
