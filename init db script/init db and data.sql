@@ -137,7 +137,7 @@ create table ChiNhanh
 (
 	ChiNhanhID char(50),
 	TenChiNhanh nvarchar(50),
-	DiaChi text,
+	DiaChi ntext,
 	MoCua time,
 	DongCua time,
 	QuanID char(50),

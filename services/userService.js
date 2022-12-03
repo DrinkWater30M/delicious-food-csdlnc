@@ -166,6 +166,19 @@ async function getPurchaseByID(KhachHangID, search){
     }
 }
 
+async function removeBill(DonHangID){
+    try{
+        const sql = `update DonHang 
+                    set TrangThai = N'Đã Hủy' 
+                    where DonHang.DonHangID = '${DonHangID}' and DonHang.TrangThai = N'Chờ Nhận'`;
+        
+        await sequelize.query(sql, { type: QueryTypes.UPDATE });
+    }
+    catch(error){
+        console.log(error);
+    }
+}
+
 module.exports = {
     getInfoByUserName,
     getInfoByID,
@@ -178,4 +191,5 @@ module.exports = {
     getShoppingCartByID,
     deleteShoppingCartByID,
     getPurchaseByID,
+    removeBill,
 }
