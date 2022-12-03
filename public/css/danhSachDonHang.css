@@ -63,14 +63,25 @@
   margin-top: 10px;
 }
 
-.partner .content .item .right {
+.partner .content .item .right-active {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
-.partner .content .item .right-active p {
+.partner .content .item .right-active p{
   background-color: green;
   color: white;
   padding: 10px;
   border-radius: 10px;
+}
+
+.partner .content .item .right-active button{
+  background-color: red;
+  color: white;
+  padding: 10px;
+  border-radius: 10px;
+  cursor: pointer;
 }
 
 .partner .content .item .right-not-active p {

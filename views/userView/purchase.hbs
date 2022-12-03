@@ -69,7 +69,7 @@
             <img src={{this.LinkHinhAnh}} alt="purchase" />
             <div class="title">
               <h3>{{this.TenMon}}</h3>
-              <p>Mã đơn hàng: {{this.DonHangID}}</p>
+              <p>Mã đơn hàng: <span class="billID">{{this.DonHangID}}</span></p>
               <p>Người nhận: {{this.NguoiNhan}}</p>
               <p>Số điện thoại: {{this.SDT}}</p>
               <p>Địa chỉ nhận hàng: {{this.DiaChiNhanHang}}</p>
@@ -79,10 +79,14 @@
             </div>
           </div>
           <div class="right-active">
-            <p>{{this.TrangThai}}</p>
+            <p class="billStatus">{{this.TrangThai}}</p>
+            <button class="removeBill">Hủy Đơn Hàng</button>
           </div>
         </div>
         {{/each}}
+        <form id="removeBill" action="/user/purchase"  method="post">
+          <input type="hidden" name="billID">
+        </form>
       </div>
       <!--  -->
 
@@ -152,18 +156,33 @@
     </section>
   </body>
   <script>
-    //get page from url
-    const params = new Proxy(new URLSearchParams(window.location.search), {
-      get: (searchParams, prop) => searchParams.get(prop),
-    });
-    // Get the value of "some_key" in eg "https://example.com/?some_key=some_value"
-    const search = params.search;
+    //remove bill
+    const billList = document.querySelectorAll('.item');
+    billList.forEach((item, index)=>{
+      const removeBillButton = item.querySelector('.removeBill');
+      const billStatus = item.querySelector('.billStatus');
+      
+      removeBillButton.addEventListener('click', ()=>{
+        //bill in failure status
+        if(billStatus.textContent.toLowerCase() != 'chờ nhận'){
+          alert('Đơn hàng chỉ được hủy khi "Chờ Nhận", không thể hủy.');
+          return;  
+        }
 
-      //add link
-      item.href = `/list?&search=${search}`
+        //cancel remove bill
+        if(!confirm('Bạn muốn hủy đơn hàng này?')){
+          return;
+        }
 
-    //add id food shop, search for input
-    document.querySelector('input[name="search"]').value = params.search;
-
-  </scrip>
+        //remove bill
+        const removeBillForm = document.getElementById('removeBill');
+        const billIDInput = document.querySelector('input[name="billID"]');
+        const billID = item.querySelector('.billID');
+        //
+        billIDInput.value = billID.textContent;
+        removeBillForm.submit();
+      })
+    })
+    
+  </script>
 </html>

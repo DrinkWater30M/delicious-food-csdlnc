@@ -195,6 +195,23 @@ async function getPurchase(req, res){
         console.log(error);
     }
 }
+
+async function removeBill(req, res){
+    try{
+        //
+        const DonHangID = req.body.billID;
+        
+        //
+        await userService.removeBill(DonHangID);
+
+        //
+        res.redirect('/user/purchase');
+    }
+    catch(error){
+        console.log(error);
+    }
+}
+
 module.exports = {
     getLoginPage,
     login,
@@ -208,4 +225,5 @@ module.exports = {
     getShoppingCart,
     deleteAtShoppingCart,
     getPurchase,
+    removeBill,
 }
