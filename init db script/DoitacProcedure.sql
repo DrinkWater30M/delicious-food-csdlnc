@@ -1,4 +1,4 @@
-﻿use QLNhaHang
+﻿use ESHOPPING_CSDLNC;
 go
 create or alter proc XemThucDonDoiTac (@DoiTacID int)
 as 
@@ -89,9 +89,9 @@ begin catch
 
 go
 --Xem ??n ??t hàng
-create or alter proc CheckDonDathangDoitac @DoiTacID int
+create or alter proc CheckDonDathangDoitac @DoiTacID char(50)
 as begin try 
-SELECT DISTINCT dh.* 
+SELECT dh.* 
 FROM DonHang dh JOIN ChiTietDonHang ctdh ON dh.DonhangID = ctdh.DonhangID JOIN Mon m ON m.MonID = ctdh.MonID 
 WHERE EXISTS (SELECT cn.ThucDonID FROM ChiNhanh cn JOIN HopDong hd ON cn.HopDongID = hd.HopDongID WHERE hd.DoiTacID = @DoiTacID 
 AND m.ThucDonID = cn.ThucDonID)
@@ -116,7 +116,7 @@ begin catch
 go
 
 -- xem c?a hàng c?a mình
-create or alter proc ListCuahangDoiTac @DoiTacID int
+create or alter proc ListCuahangDoiTac @DoiTacID char(50)
 as begin try
 select cn.* from chinhanh cn join hopdong hd on cn.HopDongID = hd.HopDongID where hd.DoiTacID = @DoitacID;
 end try
@@ -139,12 +139,10 @@ begin try
 Update ChiNhanh SET
 	TenChiNhanh = IsNull( @tenchinhanh, TenChiNhanh),
 	DiaChi = IsNull( @DiaChi, DiaChi),
-	GioMoCua = IsNull( @GioMoCua, GioMoCua),
-	GioDongCua = IsNull( @GioDongCua, GioDongCua),
+	MoCua = IsNull( @GioMoCua, MoCua),
+	DongCua = IsNull( @GioDongCua, DongCua),
 	TinhTrang = IsNull( @TinhTrang, TinhTrang)
 WHERE ChiNhanhID = @ChiNhanhID
-if @tenChiNhanh is not null
-	update chinhanh set NgayCapNhatTen = (Select SYSDATETIME()) where ChiNhanhID = @ChiNhanhID;
 end try
 begin catch
 			print N'Đã xảy ra lỗi!'
@@ -157,7 +155,7 @@ go
 create or alter proc ThongKeDonhangTheoNgay
 as
 begin try
-select dh.NgayDat, count(1) from donhang dh group by dh.NgayDat;
+select dh.NgayDatHang, count(1) from donhang dh group by dh.NgayDatHang;
 end try
 begin catch
 			print N'Đã xảy ra lỗi!'
@@ -168,7 +166,7 @@ go
 create or alter proc ThongKeDonhangTheoThang
 as
 begin try
-select Month(dh.NgayDat), YEAR(dh.NgayDat) , count(1) from donhang dh group by dh.NgayDat, Month(dh.NgayDat), YEAR(dh.NgayDat);
+select Month(dh.NgayDatHang), YEAR(dh.NgayDatHang) , count(1) from donhang dh group by Month(dh.NgayDatHang), YEAR(dh.NgayDatHang);
 end try
 begin catch
 			print N'Đã xảy ra lỗi!'
@@ -180,7 +178,7 @@ go
 create or alter proc ThongKeDonhangTheoNam
 as
 begin try
-select YEAR(dh.NgayDat) , count(1) from donhang dh group by dh.NgayDat, YEAR(dh.NgayDat);
+select YEAR(dh.NgayDatHang) , count(1) from donhang dh group by dh.NgayDatHang, YEAR(dh.NgayDatHang);
 end try
 begin catch
 			print N'Đã xảy ra lỗi!'
@@ -193,7 +191,7 @@ go
 create or alter proc ThongKeDoanhThuTheoNgay
 as
 begin try
-Select dh.NgayDat, sum(ct.GiaBan * ct.SoLuong) from donhang dh join chitietdonhang ct on dh.DonhangID = ct.DonhangID group by dh.NgayDat;
+Select dh.NgayDatHang, sum(ct.GiaBan * ct.SoLuong) from donhang dh join chitietdonhang ct on dh.DonhangID = ct.DonhangID group by dh.NgayDatHang;
 end try
 begin catch
 			print N'Đã xảy ra lỗi!'
@@ -204,8 +202,8 @@ go
 create or alter proc ThongKeDoanhThuTheoThang
 as
 begin try
-Select Month(dh.NgayDat),Year(dh.NgayDat), sum(ct.GiaBan * ct.SoLuong) 
-from donhang dh join chitietdonhang ct on dh.DonhangID = ct.DonhangID group by Month(dh.NgayDat), Year(dh.NgayDat);
+Select Month(dh.NgayDatHang),Year(dh.NgayDatHang), sum(ct.GiaBan * ct.SoLuong) 
+from donhang dh join chitietdonhang ct on dh.DonhangID = ct.DonhangID group by Month(dh.NgayDatHang), Year(dh.NgayDatHang);
 end try
 begin catch
 			print N'Đã xảy ra lỗi!'
@@ -216,8 +214,8 @@ go
 create or alter proc ThongKeDoanhThuTheoNam
 as
 begin try
-Select Year(dh.NgayDat), sum(ct.GiaBan * ct.SoLuong) from donhang dh join chitietdonhang ct on dh.DonhangID = ct.DonhangID 
-group by YEAR(dh.NgayDat);
+Select Year(dh.NgayDatHang), sum(ct.GiaBan * ct.SoLuong) from donhang dh join chitietdonhang ct on dh.DonhangID = ct.DonhangID 
+group by YEAR(dh.NgayDatHang);
 end try
 begin catch
 			print N'Đã xảy ra lỗi!'
@@ -225,3 +223,4 @@ begin catch
 			return 0
 		end catch;
 go
+exec CheckDonDathangDoitac @DoitacID = 'dt05';
