@@ -140,7 +140,7 @@ create table ChiNhanh
 	DiaChi ntext,
 	MoCua time,
 	DongCua time,
-	QuanID char(50),
+	QuanID char(50) foreign key references Quan(QuanID),
 	HopDongID char(50),
 	ThucDonID char(50),
 	TinhTrang nvarchar(20),
