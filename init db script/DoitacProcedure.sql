@@ -1,6 +1,6 @@
 ﻿use ESHOPPING_CSDLNC;
 go
-create or alter proc XemThucDonDoiTac (@DoiTacID int)
+create or alter proc XemThucDonDoiTac (@DoiTacID char(50))
 as BEGIN TRANSACTION
 begin try
 SELECT distinct td.* 
@@ -28,7 +28,7 @@ end try
 		end catch;
 go
 
-create or alter proc XoaThucDon @ThucDonID int
+create or alter proc XoaThucDon @ThucDonID char(50)
 as BEGIN TRANSACTION begin try
 delete from thucdon where thucdonid = @ThucDonID;
 commit;
@@ -59,7 +59,7 @@ begin catch
 
 go
 
-create or alter proc XoaMon @MonID int
+create or alter proc XoaMon @MonID char(50)
 as BEGIN TRANSACTION begin try
 delete from Mon where monid = @MonID;
 commit;
@@ -72,7 +72,7 @@ begin catch
 
 go
 
-create or alter proc ChinhSuaMon @MonID int,
+create or alter proc ChinhSuaMon @MonID char(50),
 								 @TenMon nvarchar(30) = NULL,
 								@MieuTaMon nvarchar(100) = NULL,
 								@Gia float = NULL,
@@ -137,7 +137,7 @@ begin catch
 go
 
 -- ch?nh s?a thông tin chi nhánh
-create or alter proc UpdateChiNhanhInfo @ChiNhanhID int,
+create or alter proc UpdateChiNhanhInfo @ChiNhanhID char(50),
 									@tenChiNhanh nvarchar(60) = null,
 									@DiaChi nvarchar(100) = null,
 									@GioMoCua time = null,
