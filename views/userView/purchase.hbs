@@ -63,12 +63,21 @@
       </div>
       <div class="content">
         {{#each purchase}}
-        <a href="/product/detail/{{this.MonID}}" class="product"></a>
         <div class="item">
           <div class="left">
-            <img src={{this.LinkHinhAnh}} alt="purchase" />
+              <div class="foods">
+              {{#each this.DanhSachMon}}
+              <div class="food">
+                <img src={{this.LinkHinhAnh}} alt="purchase" />
+                <div class="detail">
+                  <h3>{{this.TenMon}}</h3>
+                  <p>Số lượng: {{this.SoLuong}}</p>
+                  <p>Giá bán: {{this.GiaBan}}</p>
+                </div>
+              </div>
+              {{/each}}
+            </div>
             <div class="title">
-              <h3>{{this.TenMon}}</h3>
               <p>Mã đơn hàng: <span class="billID">{{this.DonHangID}}</span></p>
               <p>Người nhận: {{this.NguoiNhan}}</p>
               <p>Số điện thoại: {{this.SDT}}</p>
@@ -80,7 +89,10 @@
           </div>
           <div class="right-active">
             <p class="billStatus">{{this.TrangThai}}</p>
-            <button class="removeBill">Hủy Đơn Hàng</button>
+             {{#if this.TaiXeID}}
+            {{else}}
+              <button class="removeBill">Hủy Đơn Hàng</button>
+            {{/if}}
           </div>
         </div>
         {{/each}}
@@ -156,11 +168,23 @@
     </section>
   </body>
   <script>
+      //get page from url
+    const params = new Proxy(new URLSearchParams(window.location.search), {
+      get: (searchParams, prop) => searchParams.get(prop),
+    });
+    // Get the value of "some_key" in eg "https://example.com/?some_key=some_value"
+    const search = params.search;
+    document.querySelector('input[name="search"]').value = params.search;
+    
     //remove bill
     const billList = document.querySelectorAll('.item');
     billList.forEach((item, index)=>{
       const removeBillButton = item.querySelector('.removeBill');
       const billStatus = item.querySelector('.billStatus');
+      
+      if(!removeBillButton){
+        return;
+      }
       
       removeBillButton.addEventListener('click', ()=>{
         //bill in failure status

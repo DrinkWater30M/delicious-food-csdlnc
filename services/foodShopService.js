@@ -12,6 +12,7 @@ async function getFoodShopList(search, page){
             offset ${(page-1)*5} rows fetch next ${page*5} rows only`;
         
         const foodShopList = await sequelize.query(sql,  { type: QueryTypes.SELECT });
+        console.log(foodShopList);
 
         return foodShopList.length === 0 ? null : foodShopList;
     }
