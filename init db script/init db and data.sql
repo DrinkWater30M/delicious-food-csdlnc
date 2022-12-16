@@ -248,6 +248,7 @@ constraint fkQuan_DoiTacID foreign key(DoiTacID) references DoiTac(DoiTacID)
 go
 
 alter table ChiNhanh add
+constraint fkChiNhanh_QuanID foreign key(QuanID) references Quan(QuanID),
 constraint fkChiNhanh_HopDongID foreign key(HopDongID) references HopDong(HopDongID),
 constraint fkChiNhanh_ThucDonID foreign key(ThucDonID) references ThucDon(ThucDonID)
 go
